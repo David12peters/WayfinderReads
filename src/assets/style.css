@@ -491,3 +491,8 @@ i {
 button {
     border-radius: 3px;
 }
+
+audio {
+    visibility: hidden;
+}
+
