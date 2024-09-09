@@ -7,7 +7,7 @@ import './assets/style.css';
 import ProductImgPray from './assets/Pray.jpg';
 import ProductImgLogo from './assets/Logo.png';
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
-import Music from './assets/Romans.mp3'
+import Music from './assets/Romans.aac'
 function App() {
     const [isActive, setIsActive] = useState(false);
     const [cartItems, setCartItems] = useState([]);
