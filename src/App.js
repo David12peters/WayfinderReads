@@ -356,9 +356,7 @@ function App() {
 
 
 
-<audio src={Music} style={{
-    display: 'none'
-}} autoplay loop></audio>
+<audio src={Music} autoplay loop></audio>
 <footer id="contact">
             <h2>Contact Us</h2>
             <p>Email: davidoluwaseun874@gmail.com <a href="mailto:davidoluwaseun874@gmail.com"><i class="fa-solid fa-envelope"></i></a></p>
