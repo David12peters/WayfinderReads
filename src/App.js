@@ -300,6 +300,7 @@ function App() {
 
 
                 <i className="bx bx-x" id="close-cart" onClick={toggleCart}></i>
+            <p>Please click on the whatsaap icon or any of our social media channels after payments for confirmation and delivery. Thank you!</p>
             </div>
 
             <Router>
@@ -341,10 +342,20 @@ function App() {
                                         </button>
                                         <i className="bx bx-shopping-bag add-cart" onClick={() => addProductToCart(product)}></i>
                                     </div>
-                                ))}
-                            </div>
+                                
+                                    
+                        </section>
+                    } />
+                    <Route path="/cancel" element={<CancelPage />} />
+                    <Route path="/success" element={<SuccessPage />} />
+                </Routes>
+            </Router>
 
-                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/JxOuQxq5AOg?si=MBBCrqRAVjza4P7i" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            {fullscreenIframe && (
+                <div className="fullscreen-exit" onClick={exitFullscreen}>Exit</div>
+            )}
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JxOuQxq5AOg?si=MBBCrqRAVjza4P7i" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/bwD99EqbTKQ?si=-f6L6QX3Xrgz_-Hv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -372,21 +383,6 @@ function App() {
 <iframe width="560" height="315" src="https://www.youtube.com/embed/l7C4_v4Lnxc?si=lqt2aVK__4wBUupj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
-                                    
-                        </section>
-                    } />
-                    <Route path="/cancel" element={<CancelPage />} />
-                    <Route path="/success" element={<SuccessPage />} />
-                </Routes>
-            </Router>
-
-            {fullscreenIframe && (
-                <div className="fullscreen-exit" onClick={exitFullscreen}>Exit</div>
-            )}
-
-
-
-<audio src={Music} autoplay loop></audio>
 <footer id="contact">
             <h2>Contact Us</h2>
             <p>Email: davidoluwaseun874@gmail.com <a href="mailto:davidoluwaseun874@gmail.com"><i class="fa-solid fa-envelope"></i></a></p>
