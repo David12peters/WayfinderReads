@@ -1,0 +1,457 @@
+  {
+      "@context": "https://wayfinder-reads.vercel.app/",
+      "@type": "BookStore",
+      "name": "Christian Books Online Store",
+      "description": "Buy Christian literature and resources online",
+      "books": [
+{
+          "@type": "Book",
+          "name": "Christ Jesus our royal highpriest",
+          "image": "https://wayfinder-reads.vercel.app/#1",
+          "author": {
+            "@type": "Person",
+            "name": "Stephen R. Covey"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#1"
+        },
+
+        {
+          "@type": "Book",
+          "name": "21 Irrefutable Laws of LEADERSHIP",
+          "image": "https://wayfinder-reads.vercel.app/#2",
+          "author": {
+            "@type": "Person",
+            "name": "Stephen R. Covey"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#2"
+        },
+        {
+          "@type": "Book",
+          "name": "Adult Children of Emotionally Immature Parents",
+          "image": "https://wayfinder-reads.vercel.app/#3",
+          "author": {
+            "@type": "Person",
+            "name": "Lindsay Gibson"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#3"
+        },
+        {
+          "@type": "Book",
+          "name": "TODAY MATTERS: 12 Daily Practices To Guarantee Tomorrow\'s Success",
+          "image": "https://wayfinder-reads.vercel.app/#4",
+          "author": {
+            "@type": "Person",
+            "name": "John C. Maxwell"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#4"
+        },
+        {
+          "@type": "Book",
+          "name": "Battlefield of the Mind - Joyce Meyer",
+          "image": "https://wayfinder-reads.vercel.app/#5",
+          "author": {
+            "@type": "Person",
+            "name": "Joyce Meyer"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#5"
+        },
+        {
+          "@type": "Book",
+          "name": "Becoming a Praise Warrior",
+          "image": "https://wayfinder-reads.vercel.app/#6",
+          "author": {
+            "@type": "Person",
+            "name": "Unknown (Likely Religious Text)"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#6"
+        },
+        {
+          "@type": "Book",
+          "name": "BEYOND THE NAKED",
+          "image": "https://wayfinder-reads.vercel.app/#7",
+          "author": {
+            "@type": "Person",
+            "name": "Unknown (Likely Creative Work)"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#7"
+        },
+        {
+          "@type": "Book",
+          "name": "Binding the Strong Man - Nicholas Duncan-Williams",
+          "image": "https://wayfinder-reads.vercel.app/#8",
+          "author": {
+            "@type": "Person",
+            "name": "Nicholas Duncan-Williams"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#8"
+        },
+        {
+          "@type": "Book",
+          "name": "Church Mafia - Makhado Sinthumule",
+          "image": "https://wayfinder-reads.vercel.app/#9",
+          "author": {
+            "@type": "Person",
+            "name": "Makhado Sinthumule"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#9"
+        },
+        {
+          "@type": "Book",
+          "name": "Demons: The Answer Book - Lester Sumrall",
+          "image": "https://wayfinder-reads.vercel.app/#10",
+          "author": {
+            "@type": "Person",
+            "name": "Lester Sumrall"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#10"
+        },
+        {
+          "@type": "Book",
+          "name": "Divine Timing - Nicholas Duncan-Williams",
+          "image": "https://wayfinder-reads.vercel.app/#11",
+          "author": {
+            "@type": "Person",
+            "name": "Nicholas Duncan-Williams"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#11"
+        },
+        {
+          "@type": "Book",
+          "name": "Enforcing Prophetic Decrees - Nicholas Duncan-Williams",
+          "image": "https://wayfinder-reads.vercel.app/#12",
+          "author": {
+            "@type": "Person",
+            "name": "Nicholas Duncan-Williams"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#12"
+        },
+        {
+          "@type": "Book",
+          "name": "Erica Part 1",
+          "image": "https://wayfinder-reads.vercel.app/#13",
+          "author": {
+            "@type": "Person",
+            "name": "Unknown (Likely Fictional Series)"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#13"
+        },
+        {
+          "@type": "Book",
+          "name": "Erica Part 2",
+          "image": "https://wayfinder-reads.vercel.app/#14",
+          "author": {
+            "@type": "Person",
+            "name": "Unknown (Likely Fictional Series)"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#14"
+        },
+        {
+          "@type": "Book",
+          "name": "Erica Part Three Witchcraft Spiritual Warfare",
+          "image": "https://wayfinder-reads.vercel.app/#15",
+          "author": {
+            "@type": "Person",
+            "name": "Unknown (Likely Fictional Series)"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#15"
+        },
+        {
+          "@type": "Book",
+          "name": "Find Your Why: A Practical Guide for Discovering Purpose for You and Your Team - Simon Sinek",
+          "image": "https://wayfinder-reads.vercel.app/#16",
+          "author": {
+            "@type": "Person",
+            "name": "Simon Sinek"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#16"
+        },
+        {
+          "@type": "Book",
+          "name": "God\'s Generals: The Revivalists",
+          "image": "https://wayfinder-reads.vercel.app/#17",
+          "author": {
+            "@type": "Person",
+            "name": "Robert Foster and John W. Davis"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#17"
+        },
+        {
+          "@type": "Book",
+          "name": "God\'s Generals: Charles Finney",
+          "image": "https://wayfinder-reads.vercel.app/#18",
+          "author": {
+            "@type": "Person",
+            "name": "Robert Foster and John W. Davis"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#18"
+        },
+        {
+          "@type": "Book",
+          "name": "God\'s General",
+          "image": "https://wayfinder-reads.vercel.app/#19",
+          "author": {
+            "@type": "Person",
+            "name": "Unknown (Likely Religious Text)"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#19"
+        },
+        {
+          "@type": "Book",
+          "name": "Healing Belongs to Us - Kenneth E. Hagin",
+          "image": "https://wayfinder-reads.vercel.app/#20",
+          "author": {
+            "@type": "Person",
+            "name": "Kenneth E. Hagin"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#20"
+        },
+        {
+          "@type": "Book",
+          "name": "I Went to Hell - Kenneth E. Hagin",
+          "image": "https://wayfinder-reads.vercel.app/#21",
+          "author": {
+            "@type": "Person",
+            "name": "Kenneth E. Hagin"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#21"
+        },
+        {
+          "@type": "Book",
+          "name": "Reaching the Lost: Evangelism - Bobby Jamieson",
+          "image": "https://wayfinder-reads.vercel.app/#22",
+          "author": {
+            "@type": "Person",
+            "name": "Bobby Jamieson"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#22"
+        },
+        {
+          "@type": "Book",
+          "name": "The Emojis",
+          "image": "https://wayfinder-reads.vercel.app/#23",
+          "author": {
+            "@type": "Person",
+            "name": "Onaopemipo"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#23"
+        },
+        {
+          "@type": "Book",
+          "name": "The Miracle Seed - David O. Oyedepo",
+          "image": "https://wayfinder-reads.vercel.app/#24",
+          "author": {
+            "@type": "Person",
+            "name": "David O. Oyedepo"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#24"
+        },
+        {
+          "@type": "Book",
+          "name": "The Visions",
+          "image": "https://wayfinder-reads.vercel.app/#25",
+          "author": {
+            "@type": "Person",
+            "name": "Unknown (Likely Religious Text)"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#25"
+        },
+        {
+          "@type": "Book",
+          "name": "The Price of Greatness - Nicholas Duncan-Williams",
+          "image": "https://wayfinder-reads.vercel.app/#26",
+          "author": {
+            "@type": "Person",
+            "name": "Nicholas Duncan-Williams"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#26"
+        },
+        {
+          "@type": "Book",
+          "name": "Understanding the Power of Praise - David Oyedepo",
+          "image": "https://wayfinder-reads.vercel.app/#27",
+          "author": {
+            "@type": "Person",
+            "name": "David Oyedepo"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#27"
+        },
+        {
+          "@type": "Book",
+          "name": "When God Writes Your Love Story (Expanded Edition)",
+          "image": "https://wayfinder-reads.vercel.app/#28",
+          "author": {
+            "@type": "Person",
+            "name": "Unknown (Likely Religious Text)"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#28"
+        },
+        {
+          "@type": "Book",
+          "name": "Who is this Allah? - GJO Moshay",
+          "image": "https://wayfinder-reads.vercel.app/#29",
+          "author": {
+            "@type": "Person",
+            "name": "GJO Moshay"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#29"
+        },
+        {
+          "@type": "Book",
+          "name": "Why You Act the Way You Do - Tim Lahaye",
+          "image": "https://wayfinder-reads.vercel.app/#30",
+          "author": {
+            "@type": "Person",
+            "name": "Tim Lahaye"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Publisher Name"
+          },
+          "price": "$2",
+          "url": "https://wayfinder-reads.vercel.app/#30"
+        }
