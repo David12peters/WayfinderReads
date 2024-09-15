@@ -193,7 +193,7 @@ header {
     grid-template-columns: repeat(auto-fit,  minmax(220px, auto));
     gap: 1.5rem;
 }
-.product-box {
+.product-box iframe {
     position: relative;
     background: #2d2e37;
     padding: 10px;
