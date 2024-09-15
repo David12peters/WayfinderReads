@@ -320,7 +320,7 @@ function App() {
                                                 style={{ width: '100%', height: fullscreenIframe === `iframe-${index}` ? '100vh' : '300px', border: 'none' }}
                                                 ref={iframeRef}
                                             />
-                                            <img
+                                           <a href="https://david12peters.github.io/OGM_LOGO/index.html"> <img
                                                 src={ProductImgPray}
                                                 alt="Product Overlay"
                                                 className="product-overlay"
@@ -333,7 +333,7 @@ function App() {
                                                     borderRadius: '50%',
                                                     zIndex: 1
                                                 }}
-                                            />
+                                            /></a>
                                         </div>
                                         <h2 className="product-title">{product.title}</h2>
                                         <span className="price">{product.price}</span>
