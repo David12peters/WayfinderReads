@@ -7,16 +7,65 @@ import './assets/style.css';
 import ProductImgPray from './assets/Pray.jpg';
 import ProductImgLogo from './assets/Logo.png';
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
-import Music from './assets/Romans.aac'
+import Music from './assets/Romans.mp3'
 function App() {
     const [isActive, setIsActive] = useState(false);
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0);
     const [displayedProducts, setDisplayedProducts] = useState([]);
     const [fullscreenIframe, setFullscreenIframe] = useState(null);
+    const [isMinimized, setIsMinimized] = useState(true);
+    const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const iframeRef = useRef(null); // To hold the reference to the iframe element
     const infoPanelRef = useRef(null);
     const headerRef = useRef(null);
+    const [isLoaded, setIsLoaded] = useState(false); // Tracks when everything is fully loaded
+
+    useEffect(() => {
+      // Wait for the DOM and resources to be completely loaded
+      const handleLoad = () => {
+        setIsLoaded(true);
+      };
+  
+      // Check if document is already loaded
+      if (document.readyState === 'complete') {
+        setIsLoaded(true);
+      } else {
+        window.addEventListener('load', handleLoad);
+      }
+  
+      // Cleanup the event listener
+      return () => {
+        window.removeEventListener('load', handleLoad);
+      };
+    }, []);
+
+
+
+   inject();
+
+
+    // Array of iframe video sources
+const videoSources = [
+    'https://www.youtube.com/embed/JxOuQxq5AOg?si=MBBCrqRAVjza4P7i',
+    'https://www.youtube.com/embed/bwD99EqbTKQ?si=-f6L6QX3Xrgz_-Hv',
+    'https://www.youtube.com/embed/rnHldmO4vdk?si=5wEyWNlcwt_4lzN1',
+    'https://www.youtube.com/embed/J6OTCWSurYQ?si=3D5zWsloCKFnwc-J',
+    'https://www.youtube.com/embed/ujqiec1bAds?si=oqw-5FZ-8p-hfIWb',
+    'https://www.youtube.com/embed/25LO-SCcD4c?si=LHy-zjQExf4QswaN',
+    'https://www.youtube.com/embed/25LO-SCcD4c?si=sPx7A2oMikPdLp_5',
+    'https://www.youtube.com/embed/l7C4_v4Lnxc?si=lqt2aVK__4wBUupj',
+  ];
+
+
+  useEffect(() => {
+    // Cycle through the videos every 30 minutes
+    const videoInterval = setInterval(() => {
+      setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videoSources.length);
+    }, 1800000); // 30 minutes in milliseconds
+
+    return () => clearInterval(videoInterval);
+  }, [videoSources]);
 
     const products = [
         { id: 1, title: 'Christ Jesus our royal highpriest', price: '$2', url: 'https://drive.google.com/file/d/1Sqe5wME6DAzXkv9Z21KQIP9QDlpEzIQz/preview?usp=embed_googleplus' },
@@ -43,7 +92,7 @@ function App() {
         { id: 22, title: 'Reaching the Lost: Evangelism by Bobby Jamieson', price: '$2', url: 'https://drive.google.com/file/d/1VdeGyq6trG9MXm7Z5DHpzzmD8h_brjBs/preview?usp=embed_googleplus' },
         { id: 23, title: 'The Emojis', price: '$2', url: 'https://drive.google.com/file/d/1mZ2mxVk3CXirbmDinOivE0Dl_0Oqv2c5/preview?usp=embed_googleplus' },
         { id: 24, title: 'The Miracle Seed - David O. Oyedepo', price: '$2', url: 'https://drive.google.com/file/d/1VqxfulKcacCH8b3zo59BPp9JzFRJwnxr/preview?usp=embed_googleplus' },
-        { id: 25, title: 'The Visions', price: '$2', url: 'https://drive.google.com/file/d/1mZsoV1v90jWnKLpTHUdJIYl4cM89UE8t/preview?usp=embed_googleplus' },
+        { id: 25, title: 'The Visions', price: '$2', url: 'https://drive.google.com/file/d/1mZsoV1v90jWnKLpTHUdJIYl4zM89UE8t/preview' },
         { id: 26, title: 'The Price of Greatness - Nicholas Duncan-Williams', price: '$2', url: 'https://drive.google.com/file/d/1VrLF9Hd_Gz2Tt0rTTTk2Rx7mhB9vc652/preview?usp=embed_googleplus' },
         { id: 27, title: 'Understanding the Power of Praise - David Oyedepo', price: '$2', url: 'https://drive.google.com/file/d/1VsxkhQIYxudXg7V8T22OQaiASaf51PrB/preview?usp=embed_googleplus' },
         { id: 28, title: 'When God Writes Your Love Story (Expanded Edition)', price: '$2', url: 'https://drive.google.com/file/d/1Vzgd7I5j8D0es32t4Qlm5LffDx-0cHfG/preview?usp=embed_googleplus' },
@@ -192,7 +241,7 @@ function App() {
 
 
     const config = {
-        public_key: process.env.REACT_APP_PUBLIC_KEY,
+        public_key: process.env.REACT_APP_FLUTTERWAVE_PUBLIC_KEY,
         tx_ref: Date.now(),
         amount: total.toFixed(2) * 1700,
         currency: 'NGN',
@@ -250,6 +299,9 @@ function App() {
                             placeholder="Search for books..."
                             className="search-input"
                             onChange={(e) => handleSearch(e.target.value)}
+                            style={{
+                                color: "#00000f"
+                            }}
                         />
                         <i className="bx bx-search search-icon"></i>
                     </div>
@@ -262,7 +314,22 @@ function App() {
                 <div className="cart-content">
                     {cartItems.map((item, index) => (
                         <div key={index} className="cart-box">
-                            <a id="cartImLink" ><iframe src={item.url} alt="" className="cart-img" /></a>
+                            <a id="cartImLink" ><iframe src={item.url} alt="" className="cart-img" />
+                            <img
+                                            src={ProductImgPray}
+                                            alt="Product Overlay"
+                                            className="product-overlay"
+                                            style={{
+                                                position: 'absolute',
+                                                top: '10px',
+                                                right: '10px',
+                                                width: '50px',
+                                                height: '50px',
+                                                borderRadius: '50%',
+                                                zIndex: 1
+                                            }}
+                                        />
+                            </a>
                             <div className="detail-box">
                                 <div className="cart-product-title">{item.title}</div>
                                 <div className="cart-price">{item.price}</div>
@@ -300,51 +367,51 @@ function App() {
 
 
                 <i className="bx bx-x" id="close-cart" onClick={toggleCart}></i>
-            <p>Please click on the whatsaap icon or any of our social media channels after payments for confirmation and delivery. Thank you!</p>
             </div>
 
             <Router>
                 <Routes>
                     <Route path="/" element={
                         <section className="shop container">
-                            <h2 className="section-title"><i>Gearing Up</i></h2>
-                            <div className="products-container">
-                                {displayedProducts.map((product, index) => (
-                                    <div key={product.id} className="product-box">
-                                        <div className="iframe-container">
-                                            <iframe
-                                                id={`iframe-${index}`}
-                                                src={product.url}
-                                                title={product.title}
-                                                className={`product-frame ${fullscreenIframe === `iframe-${index}` ? 'fullscreen' : ''}`}
-                                                style={{ width: '100%', height: fullscreenIframe === `iframe-${index}` ? '100vh' : '300px', border: 'none' }}
-                                                ref={iframeRef}
-                                            />
-                                           <a href="https://david12peters.github.io/OGM_LOGO/index.html"> <img
-                                                src={ProductImgPray}
-                                                alt="Product Overlay"
-                                                className="product-overlay"
-                                                style={{
-                                                    position: 'absolute',
-                                                    top: '10px',
-                                                    right: '10px',
-                                                    width: '50px',
-                                                    height: '50px',
-                                                    borderRadius: '50%',
-                                                    zIndex: 1
-                                                }}
-                                            /></a>
-                                        </div>
-                                        <h2 className="product-title">{product.title}</h2>
-                                        <span className="price">{product.price}</span>
-                                        <button className="btn-read" onClick={() => handleRead(`iframe-${index}`)}>
-                                            Read <i className="fa-solid fa-book"></i>
-                                        </button>
-                                        <i className="bx bx-shopping-bag add-cart" onClick={() => addProductToCart(product)}></i>
+                        <h2 className="section-title"><i>Gearing Up</i></h2>
+                        <div className="products-container">
+                            {displayedProducts.map((product, index) => (
+                                <div key={product.id} className="product-box">
+                                    <div className="iframe-container">
+                                        <iframe
+                                            id={`iframe-${index}`}
+                                            src={product.url}
+                                            title={product.title}
+                                            className={`product-frame ${fullscreenIframe === `iframe-${index}` ? 'fullscreen' : ''}`}
+                                            style={{ width: '100%', height: fullscreenIframe === `iframe-${index}` ? '100vh' : '300px', border: 'none' }}
+                                            ref={iframeRef}
+                                        />
+                                        <img
+                                            src={ProductImgPray}
+                                            alt="Product Overlay"
+                                            className="product-overlay"
+                                            style={{
+                                                position: 'absolute',
+                                                top: '10px',
+                                                right: '10px',
+                                                width: '50px',
+                                                height: '50px',
+                                                borderRadius: '50%',
+                                                zIndex: 1
+                                            }}
+                                        />
                                     </div>
-                                
-                                    
-                        </section>
+                                    <h2 className="product-title">{product.title}</h2>
+                                    <span className="price">{product.price}</span>
+                                    <button className="btn-read" onClick={() => handleRead(`iframe-${index}`)}>
+                                        Read <i className="fa-solid fa-book"></i>
+                                    </button>
+                                    <i className="bx bx-shopping-bag add-cart" onClick={() => addProductToCart(product)}></i>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                    
                     } />
                     <Route path="/cancel" element={<CancelPage />} />
                     <Route path="/success" element={<SuccessPage />} />
@@ -355,34 +422,11 @@ function App() {
                 <div className="fullscreen-exit" onClick={exitFullscreen}>Exit</div>
             )}
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/JxOuQxq5AOg?si=MBBCrqRAVjza4P7i" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/bwD99EqbTKQ?si=-f6L6QX3Xrgz_-Hv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-
-
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/rnHldmO4vdk?si=5wEyWNlcwt_4lzN1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-
-
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/J6OTCWSurYQ?si=3D5zWsloCKFnwc-J" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ujqiec1bAds?si=oqw-5FZ-8p-hfIWb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/25LO-SCcD4c?si=LHy-zjQExf4QswaN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/25LO-SCcD4c?si=sPx7A2oMikPdLp_5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/l7C4_v4Lnxc?si=lqt2aVK__4wBUupj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-
+<audio src={Music} style={{
+    display: 'none'
+}} autoplay loop></audio>
 <footer id="contact">
             <h2>Contact Us</h2>
             <p>Email: davidoluwaseun874@gmail.com <a href="mailto:davidoluwaseun874@gmail.com"><i class="fa-solid fa-envelope"></i></a></p>

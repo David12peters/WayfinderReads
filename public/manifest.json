@@ -1,25 +1,550 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "name": "Christian Books Online Store",
+  "short_name": "Christian Books",
+  "description": "Buy Christian literature and resources online",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0a9396",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "/images/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
     },
     {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "src": "/images/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "@context": "https://wayfinder-reads.vercel.app/",
+  "@type": "BookStore",
+  "books": [
+    {
+      "@type": "Book",
+      "name": "Christ Jesus our royal highpriest",
+      "image": "https://wayfinder-reads.vercel.app/#1",
+      "author": {
+        "@type": "Person",
+        "name": "Stephen R. Covey"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#1"
+    },
+    {
+      "@type": "Book",
+      "name": "21 Irrefutable Laws of LEADERSHIP",
+      "image": "https://wayfinder-reads.vercel.app/#2",
+      "author": {
+        "@type": "Person",
+        "name": "Stephen R. Covey"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#2"
+    },
+    {
+      "@type": "Book",
+      "name": "Adult Children of Emotionally Immature Parents",
+      "image": "https://wayfinder-reads.vercel.app/#3",
+      "author": {
+        "@type": "Person",
+        "name": "Lindsay Gibson"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#3"
+    },
+    {
+      "@type": "Book",
+      "name": "TODAY MATTERS: 12 Daily Practices To Guarantee Tomorrow's Success",
+      "image": "https://wayfinder-reads.vercel.app/#4",
+      "author": {
+        "@type": "Person",
+        "name": "John C. Maxwell"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#4"
+    },
+    {
+      "@type": "Book",
+      "name": "Battlefield of the Mind",
+      "image": "https://wayfinder-reads.vercel.app/#5",
+      "author": {
+        "@type": "Person",
+        "name": "Joyce Meyer"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#5"
+    },
+    {
+      "@type": "Book",
+      "name": "Becoming a Praise Warrior",
+      "image": "https://wayfinder-reads.vercel.app/#6",
+      "author": {
+        "@type": "Person",
+        "name": "Unknown (Likely Religious Text)"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#6"
+    },
+    {
+      "@type": "Book",
+      "name": "BEYOND THE NAKED",
+      "image": "https://wayfinder-reads.vercel.app/#7",
+      "author": {
+        "@type": "Person",
+        "name": "Unknown (Likely Creative Work)"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#7"
+    },
+    {
+      "@type": "Book",
+      "name": "Binding the Strong Man",
+      "image": "https://wayfinder-reads.vercel.app/#8",
+      "author": {
+        "@type": "Person",
+        "name": "Nicholas Duncan-Williams"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#8"
+    },
+    {
+      "@type": "Book",
+      "name": "Bitter truth",
+      "image": "https://wayfinder-reads.vercel.app/#9",
+      "author": {
+        "@type": "Person",
+        "name": "Unknown"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#9"
+    },
+    {
+      "@type": "Book",
+      "name": "Break free from toxic people",
+      "image": "https://wayfinder-reads.vercel.app/#10",
+      "author": {
+        "@type": "Person",
+        "name": "Steve Ais"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#10"
+    },
+    {
+      "@type": "Book",
+      "name": "BREAK THE CURSE: UNVEILING COVENANT SECRETS",
+      "image": "https://wayfinder-reads.vercel.app/#11",
+      "author": {
+        "@type": "Person",
+        "name": "Steve Ais"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#11"
+    },
+    {
+      "@type": "Book",
+      "name": "Breaking point",
+      "image": "https://wayfinder-reads.vercel.app/#12",
+      "author": {
+        "@type": "Person",
+        "name": "Steve Ais"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#12"
+    },
+    {
+      "@type": "Book",
+      "name": "CAN I DO ALL THINGS",
+      "image": "https://wayfinder-reads.vercel.app/#13",
+      "author": {
+        "@type": "Person",
+        "name": "Jerrick Green"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#13"
+    },
+    {
+      "@type": "Book",
+      "name": "CELEBRATE YOU",
+      "image": "https://wayfinder-reads.vercel.app/#14",
+      "author": {
+        "@type": "Person",
+        "name": "Nicholas Duncan-Williams"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#14"
+    },
+    {
+      "@type": "Book",
+      "name": "Chase the Lion",
+      "image": "https://wayfinder-reads.vercel.app/#15",
+      "author": {
+        "@type": "Person",
+        "name": "Mark Batterson"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#15"
+    },
+    {
+      "@type": "Book",
+      "name": "Courageous Leadership",
+      "image": "https://wayfinder-reads.vercel.app/#16",
+      "author": {
+        "@type": "Person",
+        "name": "John C. Maxwell"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#16"
+    },
+    {
+      "@type": "Book",
+      "name": "Crush Your Kryptonite",
+      "image": "https://wayfinder-reads.vercel.app/#17",
+      "author": {
+        "@type": "Person",
+        "name": "John Bevere"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#17"
+    },
+    {
+      "@type": "Book",
+      "name": "Dealing With The Giants",
+      "image": "https://wayfinder-reads.vercel.app/#18",
+      "author": {
+        "@type": "Person",
+        "name": "Nicholas Duncan-Williams"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#18"
+    },
+    {
+      "@type": "Book",
+      "name": "Devotions for the Godly Woman",
+      "image": "https://wayfinder-reads.vercel.app/#19",
+      "author": {
+        "@type": "Person",
+        "name": "Joyce Meyer"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#19"
+    },
+    {
+      "@type": "Book",
+      "name": "Discover Your Purpose",
+      "image": "https://wayfinder-reads.vercel.app/#20",
+      "author": {
+        "@type": "Person",
+        "name": "John C. Maxwell"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#20"
+    },
+    {
+      "@type": "Book",
+      "name": "Dare to Discipline",
+      "image": "https://wayfinder-reads.vercel.app/#21",
+      "author": {
+        "@type": "Person",
+        "name": "James Dobson"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#21"
+    },
+    {
+      "@type": "Book",
+      "name": "Discerning the Voice of God",
+      "image": "https://wayfinder-reads.vercel.app/#22",
+      "author": {
+        "@type": "Person",
+        "name": "Priscilla Shirer"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#22"
+    },
+    {
+      "@type": "Book",
+      "name": "Draw the Circle",
+      "image": "https://wayfinder-reads.vercel.app/#23",
+      "author": {
+        "@type": "Person",
+        "name": "Mark Batterson"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#23"
+    },
+    {
+      "@type": "Book",
+      "name": "Emotionally Healthy Spirituality",
+      "image": "https://wayfinder-reads.vercel.app/#24",
+      "author": {
+        "@type": "Person",
+        "name": "Peter Scazzero"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#24"
+    },
+    {
+      "@type": "Book",
+      "name": "Experiencing God",
+      "image": "https://wayfinder-reads.vercel.app/#25",
+      "author": {
+        "@type": "Person",
+        "name": "Henry Blackaby"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#25"
+    },
+    {
+      "@type": "Book",
+      "name": "Facing Your Giants",
+      "image": "https://wayfinder-reads.vercel.app/#26",
+      "author": {
+        "@type": "Person",
+        "name": "Max Lucado"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#26"
+    },
+    {
+      "@type": "Book",
+      "name": "Fervent: A Woman's Battle Plan for Serious, Specific, and Strategic Prayer",
+      "image": "https://wayfinder-reads.vercel.app/#27",
+      "author": {
+        "@type": "Person",
+        "name": "Priscilla Shirer"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#27"
+    },
+    {
+      "@type": "Book",
+      "name": "Fresh Wind, Fresh Fire",
+      "image": "https://wayfinder-reads.vercel.app/#28",
+      "author": {
+        "@type": "Person",
+        "name": "Jim Cymbala"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#28"
+    },
+    {
+      "@type": "Book",
+      "name": "Grace for the Moment",
+      "image": "https://wayfinder-reads.vercel.app/#29",
+      "author": {
+        "@type": "Person",
+        "name": "Max Lucado"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#29"
+    },
+    {
+      "@type": "Book",
+      "name": "Hearing God",
+      "image": "https://wayfinder-reads.vercel.app/#30",
+      "author": {
+        "@type": "Person",
+        "name": "Dallas Willard"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#30"
+    },
+    {
+      "@type": "Book",
+      "name": "It’s Not Supposed to Be This Way",
+      "image": "https://wayfinder-reads.vercel.app/#31",
+      "author": {
+        "@type": "Person",
+        "name": "Lysa TerKeurst"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#31"
+    },
+    {
+      "@type": "Book",
+      "name": "Knowing God",
+      "image": "https://wayfinder-reads.vercel.app/#32",
+      "author": {
+        "@type": "Person",
+        "name": "J.I. Packer"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#32"
+    },
+    {
+      "@type": "Book",
+      "name": "Live Love Lead",
+      "image": "https://wayfinder-reads.vercel.app/#33",
+      "author": {
+        "@type": "Person",
+        "name": "Brian Houston"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#33"
+    },
+    {
+      "@type": "Book",
+      "name": "Love Does",
+      "image": "https://wayfinder-reads.vercel.app/#34",
+      "author": {
+        "@type": "Person",
+        "name": "Bob Goff"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#34"
+    },
+    {
+      "@type": "Book",
+      "name": "Made to Crave",
+      "image": "https://wayfinder-reads.vercel.app/#35",
+      "author": {
+        "@type": "Person",
+        "name": "Lysa TerKeurst"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "price": "$2",
+      "url": "https://wayfinder-reads.vercel.app/#35"
+    }
+       ]
 }
