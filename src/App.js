@@ -1,12 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
-import CancelPage from './components/CancelPage';
-import SuccessPage from './components/SuccessPage';
 import './assets/style.css';
 import ProductImgPray from './assets/Pray.jpg';
 import ProductImgLogo from './assets/Logo.png';
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
+import { inject } from '@vercel/analytics'; // Import Vercel Analytics
 import Music from './assets/Romans.mp3'
 function App() {
     const [isActive, setIsActive] = useState(false);
@@ -21,6 +20,11 @@ function App() {
     const headerRef = useRef(null);
     const [isLoaded, setIsLoaded] = useState(false); // Tracks when everything is fully loaded
 
+
+
+React.useEffect(() => {
+    inject(); // Initialize Vercel Analytics
+  }, []);
     useEffect(() => {
       // Wait for the DOM and resources to be completely loaded
       const handleLoad = () => {
@@ -39,12 +43,7 @@ function App() {
         window.removeEventListener('load', handleLoad);
       };
     }, []);
-
-
-
-   inject();
-
-
+    
     // Array of iframe video sources
 const videoSources = [
     'https://www.youtube.com/embed/JxOuQxq5AOg?si=MBBCrqRAVjza4P7i',
