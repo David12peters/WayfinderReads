@@ -11,7 +11,7 @@ const CancelPage = () => {
         <a href="mailto:davidoluwaseun874@gmail.com">davidoluwaseun874@gmail.com</a>
       </p>
       <img src={ProductImage} alt="Product" />
-      <a href="/" className="sc-btn">
+      <a href="https://wayfinder-reads.vercel.app" className="sc-btn">
         Back To Homepage
       </a>
     </div>

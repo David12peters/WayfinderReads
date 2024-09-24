@@ -1,12 +1,23 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import './App.css';
 import './assets/style.css';
 import ProductImgPray from './assets/Pray.jpg';
 import ProductImgLogo from './assets/Logo.png';
+import CancelPage from './components/CancelPage';
+import SuccessPage from './components/SuccessPage';
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
+<<<<<<< HEAD
 import { inject } from '@vercel/analytics'; // Import Vercel Analytics
+=======
+import { useNavigate } from "react-router-dom";
+import { Analytics } from '@vercel/analytics/react';  // Import Vercel Analytics
+import { inject } from '@vercel/analytics';
+>>>>>>> 1ed7ebf (Resolved merge conflicts)
 import Music from './assets/Romans.mp3'
+
+inject();
+
 function App() {
     const [isActive, setIsActive] = useState(false);
     const [cartItems, setCartItems] = useState([]);
@@ -19,6 +30,9 @@ function App() {
     const infoPanelRef = useRef(null);
     const headerRef = useRef(null);
     const [isLoaded, setIsLoaded] = useState(false); // Tracks when everything is fully loaded
+    const [isProcessing, setIsProcessing] = useState(false); // For loading state
+    const navigate = useNavigate();
+
 
 
 
@@ -259,6 +273,36 @@ const videoSources = [
     
       const handleFlutterPayment = useFlutterwave(config);
 
+  const handlePaymentSuccess = (response) => {
+    console.log("Payment Successful:", response);
+    // Verify payment on the server to ensure it's valid
+    closePaymentModal(); // Closes the payment modal programmatically
+    navigate("/success"); // Redirect to SuccessPage after payment
+  };
+
+  const handlePaymentFailure = (response) => {
+    console.log("Payment Failed or Cancelled:", response);
+    closePaymentModal(); // Closes the payment modal programmatically
+    navigate("/cancel"); // Redirect to CancelPage after failure
+  };
+
+  const handlePayment = () => {
+    setIsProcessing(true); // Show loading state during payment process
+    handleFlutterPayment({
+      callback: (response) => {
+        if (response.status === "successful") {
+          handlePaymentSuccess(response);
+        } else {
+          handlePaymentFailure(response);
+        }
+      },
+      onClose: () => {
+        // Handle case where user closes the modal without completing payment
+        console.log("Payment modal closed without completing the transaction.");
+        handlePaymentFailure();
+      },
+    });
+  };
 
 
 
@@ -412,8 +456,8 @@ const videoSources = [
                     </section>
                     
                     } />
-                    <Route path="/cancel" element={<CancelPage />} />
-                    <Route path="/success" element={<SuccessPage />} />
+                    <Route path="/cancel" element={<CancelPage />} /> {/* CancelPage Route */}
+                    <Route path="/success" element={<SuccessPage />} /> {/* SuccessPage Route */}
                 </Routes>
             </Router>
 
@@ -429,7 +473,7 @@ const videoSources = [
 <footer id="contact">
             <h2>Contact Us</h2>
             <p>Email: davidoluwaseun874@gmail.com <a href="mailto:davidoluwaseun874@gmail.com"><i class="fa-solid fa-envelope"></i></a></p>
-            <p>Whatsapp: <a href="https://wa.me/08087846847/"><i class="fab fa-whatsapp"></i></a></p>
+            <p>Whatsapp: <a href="https://wa.link/chjxqu"><i class="fab fa-whatsapp"></i></a></p>
             <p>Facebook: <a href="https://www.facebook.com/profile.php?id=61551330303945&mibextid=ZbWKwL">
             <i class="fab fa-facebook-f"></i>
           </a></p>
@@ -445,6 +489,9 @@ const videoSources = [
     </a>
   </p>
         </footer>
+
+        <Analytics /> 
+
         </div>
     );
 }
