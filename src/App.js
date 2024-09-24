@@ -10,8 +10,6 @@ import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 import { inject } from '@vercel/analytics'; // Import Vercel Analytics
 import { useNavigate } from "react-router-dom";
 import { Analytics } from '@vercel/analytics/react';  // Import Vercel Analytics
-import { inject } from '@vercel/analytics';
->>>>>>> 1ed7ebf (Resolved merge conflicts)
 import Music from './assets/Romans.mp3'
 
 inject();
