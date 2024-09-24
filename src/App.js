@@ -425,7 +425,7 @@ const videoSources = [
                                             style={{ width: '100%', height: fullscreenIframe === `iframe-${index}` ? '100vh' : '300px', border: 'none' }}
                                             ref={iframeRef}
                                         />
-                                        <a href="https://david12peters.github.io/OGM_LOGO/index.html"> <img
+                                        <a href="https://david12peters.github.io/OGM_LOGO/index.html" target="_blank" > <img
                                                 src={ProductImgPray}
                                                 alt="Product Overlay"
                                                 className="product-overlay"
@@ -464,7 +464,7 @@ const videoSources = [
 
 
 <audio src={Music} style={{
-    display: 'none'
+    visibility: 'hidden'
 }} autoplay loop></audio>
 
 
@@ -510,7 +510,19 @@ const videoSources = [
 
 
 
-
+ {!isLoaded ? (
+        <div className="loader">Loading...</div> // Display a loader while loading
+      ) : (
+        <div className="content">
+          {/* Your iframe or other content */}
+          <iframe
+            src="https://david12peters.github.io/OGM_LOGO/index.html"
+            width="100%"
+            height="600px"
+            title="PDF Document"
+          />
+        </div>
+      )}
 
 
 <footer id="contact">
@@ -532,19 +544,7 @@ const videoSources = [
     </a>
   </p>
         </footer>
- {!isLoaded ? (
-        <div className="loader">Loading...</div> // Display a loader while loading
-      ) : (
-        <div className="content">
-          {/* Your iframe or other content */}
-          <iframe
-            src="https://david12peters.github.io/OGM_LOGO/index.html"
-            width="100%"
-            height="600px"
-            title="PDF Document"
-          />
-        </div>
-      )}
+          
         <Analytics /> 
 
         </div>
