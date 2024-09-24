@@ -7,9 +7,7 @@ import ProductImgLogo from './assets/Logo.png';
 import CancelPage from './components/CancelPage';
 import SuccessPage from './components/SuccessPage';
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
-<<<<<<< HEAD
 import { inject } from '@vercel/analytics'; // Import Vercel Analytics
-=======
 import { useNavigate } from "react-router-dom";
 import { Analytics } from '@vercel/analytics/react';  // Import Vercel Analytics
 import { inject } from '@vercel/analytics';
