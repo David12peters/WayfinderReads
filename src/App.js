@@ -7,9 +7,9 @@ import ProductImgLogo from './assets/Logo.png';
 import CancelPage from './components/CancelPage';
 import SuccessPage from './components/SuccessPage';
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
-import { inject } from '@vercel/analytics'; // Import Vercel Analytics
 import { useNavigate } from "react-router-dom";
 import { Analytics } from '@vercel/analytics/react';  // Import Vercel Analytics
+import { inject } from '@vercel/analytics';
 import Music from './assets/Romans.mp3'
 
 inject();
@@ -425,20 +425,20 @@ const videoSources = [
                                             style={{ width: '100%', height: fullscreenIframe === `iframe-${index}` ? '100vh' : '300px', border: 'none' }}
                                             ref={iframeRef}
                                         />
-                                        <img
-                                            src={ProductImgPray}
-                                            alt="Product Overlay"
-                                            className="product-overlay"
-                                            style={{
-                                                position: 'absolute',
-                                                top: '10px',
-                                                right: '10px',
-                                                width: '50px',
-                                                height: '50px',
-                                                borderRadius: '50%',
-                                                zIndex: 1
-                                            }}
-                                        />
+                                        <a href="https://david12peters.github.io/OGM_LOGO/index.html"> <img
+                                                src={ProductImgPray}
+                                                alt="Product Overlay"
+                                                className="product-overlay"
+                                                style={{
+                                                    position: 'absolute',
+                                                    top: '10px',
+                                                    right: '10px',
+                                                    width: '50px',
+                                                    height: '50px',
+                                                    borderRadius: '50%',
+                                                    zIndex: 1
+                                                }}
+                                            /></a>
                                     </div>
                                     <h2 className="product-title">{product.title}</h2>
                                     <span className="price">{product.price}</span>
@@ -466,6 +466,53 @@ const videoSources = [
 <audio src={Music} style={{
     display: 'none'
 }} autoplay loop></audio>
+
+
+
+{/* Video iframe list at the bottom */}
+      <div className="iframe-container">
+        {videoSources.map((source, index) => (
+          <iframe
+            key={index}
+            src={source}
+            title={`Video ${index + 1}`}
+            className={`video-frame ${index === currentVideoIndex ? 'active' : ''}`}
+            allowFullScreen
+          ></iframe>
+        ))}
+      </div>
+
+      {/* Video icon that toggles between minimized and maximized */}
+      <div className={`video-icon ${isMinimized ? 'minimized' : 'expanded'}`}>
+        {isMinimized ? (
+          <button className="toggle-button" onClick={() => setIsMinimized(false)}>Open Video</button>
+        ) : (
+          <div className="expanded-video-container">
+            <iframe
+              src={videoSources[currentVideoIndex]}
+              title="Playing Video"
+              allowFullScreen
+              className="expanded-video"
+            ></iframe>
+            <button className="toggle-button" onClick={() => setIsMinimized(true)}>Minimize</button>
+          </div>
+        )}
+      </div>
+
+      {/* Floating Contact Section */}
+      <div className="contact-section">
+        <p>Contact us!</p>
+        <p>Email: contact@example.com</p>
+        <p>Phone: +123456789</p>
+      </div>
+
+
+
+
+
+
+
+
 <footer id="contact">
             <h2>Contact Us</h2>
             <p>Email: davidoluwaseun874@gmail.com <a href="mailto:davidoluwaseun874@gmail.com"><i class="fa-solid fa-envelope"></i></a></p>
@@ -485,7 +532,19 @@ const videoSources = [
     </a>
   </p>
         </footer>
-
+ {!isLoaded ? (
+        <div className="loader">Loading...</div> // Display a loader while loading
+      ) : (
+        <div className="content">
+          {/* Your iframe or other content */}
+          <iframe
+            src="https://david12peters.github.io/OGM_LOGO/index.html"
+            width="100%"
+            height="600px"
+            title="PDF Document"
+          />
+        </div>
+      )}
         <Analytics /> 
 
         </div>
