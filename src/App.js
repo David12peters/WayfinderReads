@@ -353,7 +353,7 @@ const videoSources = [
                 <div className="cart-content">
                     {cartItems.map((item, index) => (
                         <div key={index} className="cart-box">
-                            <a id="cartImLink" ><iframe src={item.url} alt="" className="cart-img" />
+                            <a id="cartImLink" ><iframe src={item.url} className="cart-img" title={item.title}></iframe>
                             <img
                                             src={ProductImgPray}
                                             alt="Product Overlay"
@@ -425,7 +425,7 @@ const videoSources = [
                                             style={{ width: '100%', height: fullscreenIframe === `iframe-${index}` ? '100vh' : '300px', border: 'none' }}
                                             ref={iframeRef}
                                         />
-                                        <a href="https://david12peters.github.io/OGM_LOGO/index.html" target="_blank" > <img
+                                        <a href="https://david12peters.github.io/OGM_LOGO/index.html"> <img
                                                 src={ProductImgPray}
                                                 alt="Product Overlay"
                                                 className="product-overlay"
@@ -465,7 +465,7 @@ const videoSources = [
 
 <audio src={Music} style={{
     visibility: 'hidden'
-}} autoplay loop></audio>
+}} autoPlay loop></audio>
 
 
 
@@ -510,6 +510,28 @@ const videoSources = [
 
 
 
+
+
+
+<footer id="contact">
+            <h2>Contact Us</h2>
+            <p>Email: davidoluwaseun874@gmail.com <a href="mailto:davidoluwaseun874@gmail.com"><i className="fa-solid fa-envelope"></i></a></p>
+            <p>Whatsapp: <a href="https://wa.link/chjxqu"><i className="fab fa-whatsapp"></i></a></p>
+            <p>Facebook: <a href="https://www.facebook.com/profile.php?id=61551330303945&mibextid=ZbWKwL">
+            <i className="fab fa-facebook-f"></i>
+          </a></p>
+            <p>Twitter: <a href="https://twitter.com/davidpeters874/">
+            <i className="fab fa-twitter"></i>
+          </a></p>
+            <p>Instagram: <a href="https://www.instagram.com/davidpeters1098/">
+            <i className="fab fa-instagram"></i>
+          </a></p>
+          <p>
+    Youtube: <a href="https://www.youtube.com/@Davcent" target="_blank" rel="noopener noreferrer">
+      <i className="fab fa-youtube"></i>
+    </a>
+  </p>
+        </footer>
  {!isLoaded ? (
         <div className="loader">Loading...</div> // Display a loader while loading
       ) : (
@@ -523,28 +545,6 @@ const videoSources = [
           />
         </div>
       )}
-
-
-<footer id="contact">
-            <h2>Contact Us</h2>
-            <p>Email: davidoluwaseun874@gmail.com <a href="mailto:davidoluwaseun874@gmail.com"><i class="fa-solid fa-envelope"></i></a></p>
-            <p>Whatsapp: <a href="https://wa.link/chjxqu"><i class="fab fa-whatsapp"></i></a></p>
-            <p>Facebook: <a href="https://www.facebook.com/profile.php?id=61551330303945&mibextid=ZbWKwL">
-            <i class="fab fa-facebook-f"></i>
-          </a></p>
-            <p>Twitter: <a href="https://twitter.com/davidpeters874/">
-            <i class="fab fa-twitter"></i>
-          </a></p>
-            <p>Instagram: <a href="https://www.instagram.com/davidpeters1098/">
-            <i class="fab fa-instagram"></i>
-          </a></p>
-          <p>
-    Youtube: <a href="https://www.youtube.com/@Davcent" target="_blank" rel="noopener noreferrer">
-      <i className="fab fa-youtube"></i>
-    </a>
-  </p>
-        </footer>
-          
         <Analytics /> 
 
         </div>
