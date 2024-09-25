@@ -470,17 +470,18 @@ const videoSources = [
 
 
 {/* Video iframe list at the bottom */}
-    {/*<div className="iframe-container">
+    <div className="iframe-sec-container">
         {videoSources.map((source, index) => (
           <iframe
             key={index}
             src={source}
             title={`Video ${index + 1}`}
+            allow="autoplay"
             className={`video-frame ${index === currentVideoIndex ? 'active' : ''}`}
             allowFullScreen
           ></iframe>
         ))}
-      </div>*/}
+      </div>
 
       {/* Video icon that toggles between minimized and maximized */}
       <div className={`video-icon ${isMinimized ? 'minimized' : 'expanded'}`}>
