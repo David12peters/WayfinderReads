@@ -32,9 +32,7 @@ function App() {
 
 
 
-React.useEffect(() => {
-    inject(); // Initialize Vercel Analytics
-  }, []);
+
     useEffect(() => {
       // Wait for the DOM and resources to be completely loaded
       const handleLoad = () => {
