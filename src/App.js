@@ -25,32 +25,13 @@ function App() {
     const iframeRef = useRef(null); // To hold the reference to the iframe element
     const infoPanelRef = useRef(null);
     const headerRef = useRef(null);
-    const [isLoaded, setIsLoaded] = useState(false); // Tracks when everything is fully loaded
-    const [isProcessing, setIsProcessing] = useState(false); // For loading state
     const navigate = useNavigate();
 
 
 
 
 
-    useEffect(() => {
-      // Wait for the DOM and resources to be completely loaded
-      const handleLoad = () => {
-        setIsLoaded(true);
-      };
-  
-      // Check if document is already loaded
-      if (document.readyState === 'complete') {
-        setIsLoaded(true);
-      } else {
-        window.addEventListener('load', handleLoad);
-      }
-  
-      // Cleanup the event listener
-      return () => {
-        window.removeEventListener('load', handleLoad);
-      };
-    }, []);
+    
     
     // Array of iframe video sources
 const videoSources = [
@@ -531,20 +512,7 @@ const videoSources = [
     </a>
   </p>
         </footer>
- {!isLoaded ? (
-        <div className="loader">Loading...</div> // Display a loader while loading
-      ) : (
-        <div className="content">
-          {/* Your iframe or other content */}
-          <iframe
-            src="https://david12peters.github.io/OGM_LOGO/index.html"
-            width="100%"
-            height="600px"
-            title="PDF Document"
-          />
-        </div>
-      )}
-        <Analytics /> 
+          <Analytics /> 
 
         </div>
     );
