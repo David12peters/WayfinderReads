@@ -463,9 +463,9 @@ const videoSources = [
 
 
 
-<audio src={Music} style={{
+                        {/*<audio src={Music} style={{
     visibility: 'hidden'
-}} autoPlay loop></audio>
+}} autoPlay loop></audio>*/}
 
 
 
