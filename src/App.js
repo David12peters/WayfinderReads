@@ -342,9 +342,7 @@ function App() {
                                         </button>
                                         <i className="bx bx-shopping-bag add-cart" onClick={() => addProductToCart(product)}></i>
                                     </div>
-                                
-                                    
-                        </section>
+                                                </section>
                     } />
                     <Route path="/cancel" element={<CancelPage />} />
                     <Route path="/success" element={<SuccessPage />} />
