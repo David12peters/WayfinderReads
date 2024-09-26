@@ -1,60 +1,22 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
+import CancelPage from './components/CancelPage';
+import SuccessPage from './components/SuccessPage';
 import './assets/style.css';
 import ProductImgPray from './assets/Pray.jpg';
 import ProductImgLogo from './assets/Logo.png';
-import CancelPage from './components/CancelPage';
-import SuccessPage from './components/SuccessPage';
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
-import { useNavigate } from "react-router-dom";
-import { Analytics } from '@vercel/analytics/react';  // Import Vercel Analytics
-import { inject } from '@vercel/analytics';
-import Music from './assets/Romans.mp3'
-
-inject();
-
+import Music from './assets/Romans.aac'
 function App() {
     const [isActive, setIsActive] = useState(false);
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0);
     const [displayedProducts, setDisplayedProducts] = useState([]);
     const [fullscreenIframe, setFullscreenIframe] = useState(null);
-    const [isMinimized, setIsMinimized] = useState(true);
-    const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const iframeRef = useRef(null); // To hold the reference to the iframe element
     const infoPanelRef = useRef(null);
     const headerRef = useRef(null);
-    const navigate = useNavigate();
-    const [isProcessing, setIsProcessing] = useState(false);
-
-
-
-
-
-    
-    
-    // Array of iframe video sources
-const videoSources = [
-    'https://www.youtube.com/embed/JxOuQxq5AOg?si=MBBCrqRAVjza4P7i',
-    'https://www.youtube.com/embed/bwD99EqbTKQ?si=-f6L6QX3Xrgz_-Hv',
-    'https://www.youtube.com/embed/rnHldmO4vdk?si=5wEyWNlcwt_4lzN1',
-    'https://www.youtube.com/embed/J6OTCWSurYQ?si=3D5zWsloCKFnwc-J',
-    'https://www.youtube.com/embed/ujqiec1bAds?si=oqw-5FZ-8p-hfIWb',
-    'https://www.youtube.com/embed/25LO-SCcD4c?si=LHy-zjQExf4QswaN',
-    'https://www.youtube.com/embed/25LO-SCcD4c?si=sPx7A2oMikPdLp_5',
-    'https://www.youtube.com/embed/l7C4_v4Lnxc?si=lqt2aVK__4wBUupj',
-  ];
-
-
-  useEffect(() => {
-    // Cycle through the videos every 30 minutes
-    const videoInterval = setInterval(() => {
-      setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videoSources.length);
-    }, 1800000); // 30 minutes in milliseconds
-
-    return () => clearInterval(videoInterval);
-  }, [videoSources]);
 
     const products = [
         { id: 1, title: 'Christ Jesus our royal highpriest', price: '$2', url: 'https://drive.google.com/file/d/1Sqe5wME6DAzXkv9Z21KQIP9QDlpEzIQz/preview?usp=embed_googleplus' },
@@ -81,7 +43,7 @@ const videoSources = [
         { id: 22, title: 'Reaching the Lost: Evangelism by Bobby Jamieson', price: '$2', url: 'https://drive.google.com/file/d/1VdeGyq6trG9MXm7Z5DHpzzmD8h_brjBs/preview?usp=embed_googleplus' },
         { id: 23, title: 'The Emojis', price: '$2', url: 'https://drive.google.com/file/d/1mZ2mxVk3CXirbmDinOivE0Dl_0Oqv2c5/preview?usp=embed_googleplus' },
         { id: 24, title: 'The Miracle Seed - David O. Oyedepo', price: '$2', url: 'https://drive.google.com/file/d/1VqxfulKcacCH8b3zo59BPp9JzFRJwnxr/preview?usp=embed_googleplus' },
-        { id: 25, title: 'The Visions', price: '$2', url: 'https://drive.google.com/file/d/1mZsoV1v90jWnKLpTHUdJIYl4zM89UE8t/preview' },
+        { id: 25, title: 'The Visions', price: '$2', url: 'https://drive.google.com/file/d/1mZsoV1v90jWnKLpTHUdJIYl4cM89UE8t/preview?usp=embed_googleplus' },
         { id: 26, title: 'The Price of Greatness - Nicholas Duncan-Williams', price: '$2', url: 'https://drive.google.com/file/d/1VrLF9Hd_Gz2Tt0rTTTk2Rx7mhB9vc652/preview?usp=embed_googleplus' },
         { id: 27, title: 'Understanding the Power of Praise - David Oyedepo', price: '$2', url: 'https://drive.google.com/file/d/1VsxkhQIYxudXg7V8T22OQaiASaf51PrB/preview?usp=embed_googleplus' },
         { id: 28, title: 'When God Writes Your Love Story (Expanded Edition)', price: '$2', url: 'https://drive.google.com/file/d/1Vzgd7I5j8D0es32t4Qlm5LffDx-0cHfG/preview?usp=embed_googleplus' },
@@ -230,7 +192,7 @@ const videoSources = [
 
 
     const config = {
-        public_key: process.env.REACT_APP_FLUTTERWAVE_PUBLIC_KEY,
+        public_key: process.env.REACT_APP_PUBLIC_KEY,
         tx_ref: Date.now(),
         amount: total.toFixed(2) * 1700,
         currency: 'NGN',
@@ -249,36 +211,6 @@ const videoSources = [
     
       const handleFlutterPayment = useFlutterwave(config);
 
-  const handlePaymentSuccess = (response) => {
-    console.log("Payment Successful:", response);
-    // Verify payment on the server to ensure it's valid
-    closePaymentModal(); // Closes the payment modal programmatically
-    navigate("/success"); // Redirect to SuccessPage after payment
-  };
-
-  const handlePaymentFailure = (response) => {
-    console.log("Payment Failed or Cancelled:", response);
-    closePaymentModal(); // Closes the payment modal programmatically
-    navigate("/cancel"); // Redirect to CancelPage after failure
-  };
-
-  const handlePayment = () => {
-    setIsProcessing(true); // Show loading state during payment process
-    handleFlutterPayment({
-      callback: (response) => {
-        if (response.status === "successful") {
-          handlePaymentSuccess(response);
-        } else {
-          handlePaymentFailure(response);
-        }
-      },
-      onClose: () => {
-        // Handle case where user closes the modal without completing payment
-        console.log("Payment modal closed without completing the transaction.");
-        handlePaymentFailure();
-      },
-    });
-  };
 
 
 
@@ -318,9 +250,6 @@ const videoSources = [
                             placeholder="Search for books..."
                             className="search-input"
                             onChange={(e) => handleSearch(e.target.value)}
-                            style={{
-                                color: "#00000f"
-                            }}
                         />
                         <i className="bx bx-search search-icon"></i>
                     </div>
@@ -333,22 +262,7 @@ const videoSources = [
                 <div className="cart-content">
                     {cartItems.map((item, index) => (
                         <div key={index} className="cart-box">
-                            <a id="cartImLink" ><iframe src={item.url} className="cart-img" title={item.title}></iframe>
-                            <img
-                                            src={ProductImgPray}
-                                            alt="Product Overlay"
-                                            className="product-overlay"
-                                            style={{
-                                                position: 'absolute',
-                                                top: '10px',
-                                                right: '10px',
-                                                width: '50px',
-                                                height: '50px',
-                                                borderRadius: '50%',
-                                                zIndex: 1
-                                            }}
-                                        />
-                            </a>
+                            <a id="cartImLink" ><iframe src={item.url} alt="" className="cart-img" /></a>
                             <div className="detail-box">
                                 <div className="cart-product-title">{item.title}</div>
                                 <div className="cart-price">{item.price}</div>
@@ -386,26 +300,27 @@ const videoSources = [
 
 
                 <i className="bx bx-x" id="close-cart" onClick={toggleCart}></i>
+            <p>Please click on the whatsaap icon or any of our social media channels after payments for confirmation and delivery. Thank you!</p>
             </div>
 
             <Router>
                 <Routes>
                     <Route path="/" element={
                         <section className="shop container">
-                        <h2 className="section-title"><i>Gearing Up</i></h2>
-                        <div className="products-container">
-                            {displayedProducts.map((product, index) => (
-                                <div key={product.id} className="product-box">
-                                    <div className="iframe-container">
-                                        <iframe
-                                            id={`iframe-${index}`}
-                                            src={product.url}
-                                            title={product.title}
-                                            className={`product-frame ${fullscreenIframe === `iframe-${index}` ? 'fullscreen' : ''}`}
-                                            style={{ width: '100%', height: fullscreenIframe === `iframe-${index}` ? '100vh' : '300px', border: 'none' }}
-                                            ref={iframeRef}
-                                        />
-                                        <a href="https://david12peters.github.io/OGM_LOGO/index.html"> <img
+                            <h2 className="section-title"><i>Gearing Up</i></h2>
+                            <div className="products-container">
+                                {displayedProducts.map((product, index) => (
+                                    <div key={product.id} className="product-box">
+                                        <div className="iframe-container">
+                                            <iframe
+                                                id={`iframe-${index}`}
+                                                src={product.url}
+                                                title={product.title}
+                                                className={`product-frame ${fullscreenIframe === `iframe-${index}` ? 'fullscreen' : ''}`}
+                                                style={{ width: '100%', height: fullscreenIframe === `iframe-${index}` ? '100vh' : '300px', border: 'none' }}
+                                                ref={iframeRef}
+                                            />
+                                           <a href="https://david12peters.github.io/OGM_LOGO/index.html"> <img
                                                 src={ProductImgPray}
                                                 alt="Product Overlay"
                                                 className="product-overlay"
@@ -419,21 +334,20 @@ const videoSources = [
                                                     zIndex: 1
                                                 }}
                                             /></a>
+                                        </div>
+                                        <h2 className="product-title">{product.title}</h2>
+                                        <span className="price">{product.price}</span>
+                                        <button className="btn-read" onClick={() => handleRead(`iframe-${index}`)}>
+                                            Read <i className="fa-solid fa-book"></i>
+                                        </button>
+                                        <i className="bx bx-shopping-bag add-cart" onClick={() => addProductToCart(product)}></i>
                                     </div>
-                                    <h2 className="product-title">{product.title}</h2>
-                                    <span className="price">{product.price}</span>
-                                    <button className="btn-read" onClick={() => handleRead(`iframe-${index}`)}>
-                                        Read <i className="fa-solid fa-book"></i>
-                                    </button>
-                                    <i className="bx bx-shopping-bag add-cart" onClick={() => addProductToCart(product)}></i>
-                                </div>
-                            ))}
-                        </div>
-                    </section>
-                    
+                                
+                                    
+                        </section>
                     } />
-                    <Route path="/cancel" element={<CancelPage />} /> {/* CancelPage Route */}
-                    <Route path="/success" element={<SuccessPage />} /> {/* SuccessPage Route */}
+                    <Route path="/cancel" element={<CancelPage />} />
+                    <Route path="/success" element={<SuccessPage />} />
                 </Routes>
             </Router>
 
@@ -441,71 +355,46 @@ const videoSources = [
                 <div className="fullscreen-exit" onClick={exitFullscreen}>Exit</div>
             )}
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JxOuQxq5AOg?si=MBBCrqRAVjza4P7i" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
-                        {/*<audio src={Music} style={{
-    visibility: 'hidden'
-}} autoPlay loop></audio>*/}
-
-
-
-{/* Video iframe list at the bottom */}
-    <div className="iframe-sec-container">
-        {videoSources.map((source, index) => (
-          <iframe
-            key={index}
-            src={source}
-            title={`Video ${index + 1}`}
-            allow="autoplay"
-            className={`video-frame ${index === currentVideoIndex ? 'active' : ''}`}
-            allowFullScreen
-          ></iframe>
-        ))}
-      </div>
-
-      {/* Video icon that toggles between minimized and maximized */}
-      <div className={`video-icon ${isMinimized ? 'minimized' : 'expanded'}`}>
-        {isMinimized ? (
-          <button className="toggle-button" onClick={() => setIsMinimized(false)}>Open Video</button>
-        ) : (
-          <div className="expanded-video-container">
-            <iframe
-              src={videoSources[currentVideoIndex]}
-              title="Playing Video"
-              allowFullScreen
-              className="expanded-video"
-            ></iframe>
-            <button className="toggle-button" onClick={() => setIsMinimized(true)}>Minimize</button>
-          </div>
-        )}
-      </div>
-
-      {/* Floating Contact Section */}
-      <div className="contact-section">
-        <p>Contact us!</p>
-        <p>Email: contact@example.com</p>
-        <p>Phone: +123456789</p>
-      </div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bwD99EqbTKQ?si=-f6L6QX3Xrgz_-Hv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rnHldmO4vdk?si=5wEyWNlcwt_4lzN1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/J6OTCWSurYQ?si=3D5zWsloCKFnwc-J" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ujqiec1bAds?si=oqw-5FZ-8p-hfIWb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/25LO-SCcD4c?si=LHy-zjQExf4QswaN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/25LO-SCcD4c?si=sPx7A2oMikPdLp_5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/l7C4_v4Lnxc?si=lqt2aVK__4wBUupj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 <footer id="contact">
             <h2>Contact Us</h2>
-            <p>Email: davidoluwaseun874@gmail.com <a href="mailto:davidoluwaseun874@gmail.com"><i className="fa-solid fa-envelope"></i></a></p>
-            <p>Whatsapp: <a href="https://wa.link/chjxqu"><i className="fab fa-whatsapp"></i></a></p>
+            <p>Email: davidoluwaseun874@gmail.com <a href="mailto:davidoluwaseun874@gmail.com"><i class="fa-solid fa-envelope"></i></a></p>
+            <p>Whatsapp: <a href="https://wa.me/08087846847/"><i class="fab fa-whatsapp"></i></a></p>
             <p>Facebook: <a href="https://www.facebook.com/profile.php?id=61551330303945&mibextid=ZbWKwL">
-            <i className="fab fa-facebook-f"></i>
+            <i class="fab fa-facebook-f"></i>
           </a></p>
             <p>Twitter: <a href="https://twitter.com/davidpeters874/">
-            <i className="fab fa-twitter"></i>
+            <i class="fab fa-twitter"></i>
           </a></p>
             <p>Instagram: <a href="https://www.instagram.com/davidpeters1098/">
-            <i className="fab fa-instagram"></i>
+            <i class="fab fa-instagram"></i>
           </a></p>
           <p>
     Youtube: <a href="https://www.youtube.com/@Davcent" target="_blank" rel="noopener noreferrer">
@@ -513,8 +402,6 @@ const videoSources = [
     </a>
   </p>
         </footer>
-          <Analytics /> 
-
         </div>
     );
 }
