@@ -217,8 +217,11 @@ function App() {
 
     return (
         <div className="App">
-            <header ref={headerRef}>
-                <div className="nav container">
+<div className="App">
+    <header ref={headerRef}>
+        {/* Header content */}
+
+<div className="nav container">
                     <nav>
                         <div className="container">
                             <div className="menu-toggle" onClick={option} >&#9776;</div>
@@ -255,10 +258,13 @@ function App() {
                     </div>
                     <i className="bx bx-shopping-bag" id="cart-icon" data-quantity="0" onClick={toggleCart}></i>
                 </div>
-            </header>
 
-            <div className={`cart ${isActive ? 'active' : ''}`}>
-                <h2 className="cart-title">Your Cart</h2>
+    </header>
+
+    {/* Cart content */}
+    <div className={`cart ${isActive ? 'active' : ''}`}>
+        {/* Cart details */}
+  <h2 className="cart-title">Your Cart</h2>
                 <div className="cart-content">
                     {cartItems.map((item, index) => (
                         <div key={index} className="cart-box">
@@ -301,11 +307,14 @@ function App() {
 
                 <i className="bx bx-x" id="close-cart" onClick={toggleCart}></i>
             <p>Please click on the whatsaap icon or any of our social media channels after payments for confirmation and delivery. Thank you!</p>
-            </div>
+    </div>
 
-            <Router>
-                <Routes>
-                    <Route path="/" element={
+    {/* Wrap everything else in a React fragment or div */}
+    <>
+        <Router>
+            <Routes>
+                {/* Route definitions */}
+<Route path="/" element={
                         <section className="shop container">
                             <h2 className="section-title"><i>Gearing Up</i></h2>
                             <div className="products-container">
@@ -346,14 +355,14 @@ function App() {
                     } />
                     <Route path="/cancel" element={<CancelPage />} />
                     <Route path="/success" element={<SuccessPage />} />
-                </Routes>
-            </Router>
+            </Routes>
+        </Router>
 
-            {fullscreenIframe && (
-                <div className="fullscreen-exit" onClick={exitFullscreen}>Exit</div>
-            )}
+        {fullscreenIframe && (
+            <div className="fullscreen-exit" onClick={exitFullscreen}>Exit</div>
+        )}
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/JxOuQxq5AOg?si=MBBCrqRAVjza4P7i" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/JxOuQxq5AOg?si=MBBCrqRAVjza4P7i" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/bwD99EqbTKQ?si=-f6L6QX3Xrgz_-Hv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -400,8 +409,9 @@ function App() {
     </a>
   </p>
         </footer>
-        </div>
-    );
+    </>
+</div>
+);
 }
 
 export default App
