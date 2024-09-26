@@ -315,7 +315,7 @@ function App() {
             <Routes>
                 {/* Route definitions */}
 <Route path="/" element={
-                        <section className="shop container">
+                        < className="shop container">
                             <h2 className="section-title"><i>Gearing Up</i></h2>
                             <div className="products-container">
                                 {displayedProducts.map((product, index) => (
@@ -351,7 +351,7 @@ function App() {
                                         </button>
                                         <i className="bx bx-shopping-bag add-cart" onClick={() => addProductToCart(product)}></i>
                                     </div>
-                                                </section>
+                                                </>
                     } />
                     <Route path="/cancel" element={<CancelPage />} />
                     <Route path="/success" element={<SuccessPage />} />
