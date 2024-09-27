@@ -1,13 +1,21 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import './App.css';
-import CancelPage from './components/CancelPage';
-import SuccessPage from './components/SuccessPage';
 import './assets/style.css';
 import ProductImgPray from './assets/Pray.jpg';
 import ProductImgLogo from './assets/Logo.png';
+import CancelPage from './components/CancelPage';
+import SuccessPage from './components/SuccessPage';
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
+import { useNavigate } from "react-router-dom";
+import { Analytics } from '@vercel/analytics/react';  // Import Vercel Analytics
+import { inject } from '@vercel/analytics';
 import Music from './assets/Romans.mp3'
+
+
+inject();
+
+
 
 function App() {
     const [isActive, setIsActive] = useState(false);
@@ -18,6 +26,7 @@ function App() {
     const iframeRef = useRef(null); // To hold the reference to the iframe element
     const infoPanelRef = useRef(null);
     const headerRef = useRef(null);
+
 
     const products = [
         { id: 1, title: 'Christ Jesus our royal highpriest', price: '$2', url: 'https://drive.google.com/file/d/1Sqe5wME6DAzXkv9Z21KQIP9QDlpEzIQz/preview?usp=embed_googleplus' },
@@ -51,6 +60,7 @@ function App() {
         { id: 29, title: 'Walking in Financial Dominion', price: '$2', url: 'https://drive.google.com/file/d/1ViPrXgdh3uXAZnHnZyBmbQ1_4SeKKpqw/preview?usp=embed_googleplus' },
     ];
 
+
     useEffect(() => {
         setDisplayedProducts(products);
         const storedCartItems = localStorage.getItem('cartItems');
@@ -59,10 +69,12 @@ function App() {
         if (storedTotal) setTotal(parseFloat(storedTotal));
     }, []);
 
+
     useEffect(() => {
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
         localStorage.setItem('total', total.toFixed(2));
     }, [cartItems, total]);
+
 
     const handleSearch = (e) => {
         const query = e.target.value;
@@ -71,6 +83,7 @@ function App() {
         );
         setDisplayedProducts(filteredProducts);
     };
+
 
     const addToCart = (product) => {
         const existingItem = cartItems.find(item => item.id === product.id);
@@ -87,11 +100,13 @@ function App() {
         }
     };
 
+
     const removeFromCart = (product) => {
         const updatedCartItems = cartItems.filter(item => item.id !== product.id);
         setCartItems(updatedCartItems);
         setTotal(total - (product.quantity * parseFloat(product.price.slice(1))));
     };
+
 
     const handleFlutterPayment = useFlutterwave({
         public_key: 'FLWPUBK_TEST-SANDBOXDEMOKEY-X',
@@ -111,23 +126,28 @@ function App() {
         },
     });
 
+
     const showIframeFullscreen = (iframeUrl) => {
         setFullscreenIframe(iframeUrl);
     };
 
+
     const hideIframeFullscreen = () => {
         setFullscreenIframe(null);
     };
+
 
     const option = () => {
         const header = headerRef.current;
         header.style.height = 'auto';
     };
 
+
     const hideInfoPanel = () => {
         const infoPanel = infoPanelRef.current;
         infoPanel.style.display = 'none';
     };
+
 
     return (
         <Router>
@@ -191,4 +211,8 @@ function App() {
     );
 }
 
+
 export default App;
+
+## Page break
+
