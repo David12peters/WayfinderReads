@@ -474,9 +474,100 @@ i {
 
 
 
+
+
+
+
 .iframe-container {
-    position: relative;
+    display: flex;
+  justify-content: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-top: 2px solid #ddd;
 }
+
+.video-frame {
+    width: 300px;
+    height: 200px;
+    margin: 0 10px;
+    display: none;
+    border: none;
+  }
+  
+  .video-frame.active {
+    display: block;
+  }
+  
+  /* Styling for the video icon on the screen */
+  .video-icon {
+    position: fixed;
+    right: 20px;
+    bottom: 40%;
+    width: 100px;
+    height: 80px;
+    background-color: #333;
+    border-radius: 30px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2;
+  }
+  
+  .video-icon.expanded {
+    width: 500px;
+    height: 300px;
+    border-radius: 0;
+  }
+  
+  .expanded-video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .expanded-video {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  
+  .toggle-button {
+    position: absolute;
+    top: 20px;
+    right: 5px;
+    background-color: #fff;
+    color: #333;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    z-index: 100;
+    border-radius: 30px;
+  }
+  
+  /* Floating contact section */
+  .contact-section {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contact-section p {
+    margin: 5px 0;
+  }
+
+
+
+
+
 
 .product-overlay {
     position: absolute;
@@ -490,4 +581,20 @@ i {
 
 button {
     border-radius: 3px;
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 24px;
+  }
+  
+  .content {
+    display: block;
+  }
+  
+  .search-input {
+    color: #00000f;
 }
