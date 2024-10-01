@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
-import CancelPage from './CancelPage';
-import SuccessPage from './SuccessPage';
+import CancelPage from './components/CancelPage';
+import SuccessPage from './components/SuccessPage';
 
 
 const App = () => {
