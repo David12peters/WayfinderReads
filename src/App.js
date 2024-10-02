@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import CancelPage from './components/CancelPage';
 import SuccessPage from './components/SuccessPage';
-
+import Music from './assets/Romans.mp3';
 
 const App = () => {
     const [fullscreenIframe, setFullscreenIframe] = useState(false);
@@ -107,6 +107,7 @@ const videoSources = [
             {fullscreenIframe && (
                 <div className="fullscreen-exit" onClick={exitFullscreen}>Exit</div>
             )}
+<audio src={Music} autoPlay></audio>
 
 
             {/* Video iframe list at the bottom */}
