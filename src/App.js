@@ -11,6 +11,13 @@ const App = () => {
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
 
+    // Dummy data for products (assuming this is fetched or passed in reality)
+    const products = [
+        { title: 'Product 1', price: '$10', image: 'image1.jpg' },
+        { title: 'Product 2', price: '$20', image: 'image2.jpg' },
+        // Add more products here
+    ];
+    
     // Array of iframe video sources
 const videoSources = [
     'https://www.youtube.com/embed/JxOuQxq5AOg?si=MBBCrqRAVjza4P7i',
@@ -23,13 +30,6 @@ const videoSources = [
     'https://www.youtube.com/embed/l7C4_v4Lnxc?si=lqt2aVK__4wBUupj',
   ];
 
-
-    // Video sources
-    const videoSources = [
-        'https://www.youtube.com/embed/dQw4w9WgXcQ', // Video 1
-        'https://www.youtube.com/embed/9bZkp7q19f0',  // Video 2
-        // Add more video sources here
-    ];
 
 
     // Function to switch video every 30 minutes
