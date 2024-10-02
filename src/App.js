@@ -11,12 +11,17 @@ const App = () => {
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
 
-    // Dummy data for products (assuming this is fetched or passed in reality)
-    const products = [
-        { title: 'Product 1', price: '$10', image: 'image1.jpg' },
-        { title: 'Product 2', price: '$20', image: 'image2.jpg' },
-        // Add more products here
-    ];
+    // Array of iframe video sources
+const videoSources = [
+    'https://www.youtube.com/embed/JxOuQxq5AOg?si=MBBCrqRAVjza4P7i',
+    'https://www.youtube.com/embed/bwD99EqbTKQ?si=-f6L6QX3Xrgz_-Hv',
+    'https://www.youtube.com/embed/rnHldmO4vdk?si=5wEyWNlcwt_4lzN1',
+    'https://www.youtube.com/embed/J6OTCWSurYQ?si=3D5zWsloCKFnwc-J',
+    'https://www.youtube.com/embed/ujqiec1bAds?si=oqw-5FZ-8p-hfIWb',
+    'https://www.youtube.com/embed/25LO-SCcD4c?si=LHy-zjQExf4QswaN',
+    'https://www.youtube.com/embed/25LO-SCcD4c?si=sPx7A2oMikPdLp_5',
+    'https://www.youtube.com/embed/l7C4_v4Lnxc?si=lqt2aVK__4wBUupj',
+  ];
 
 
     // Video sources
