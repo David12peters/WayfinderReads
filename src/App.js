@@ -85,50 +85,6 @@ const videoSources = [
 
     return (
         <div className="app">
-
-    <header ref={headerRef}>
-                <div className="nav container">
-                    <nav>
-                        <div className="container">
-                            <div className="menu-toggle" onClick={option} >&#9776;</div>
-                            <ul id="largeul">
-                                <li className="projects">
-                                    <a href="#" onClick={handleShare} id="icons-l"><i className="fa fa-share"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#" onClick={handleContact} id="icons-l"><i className="fas fa-address-card"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div id="info-panel" className="info-panel" ref={infoPanelRef} >
-                            <div className="menu-exit" onClick={hideInfoPanel}>&times;</div>
-                            <ul>
-                                <li className="shareButton"><a href="#" onClick={handleContact}><i className="fa fa-user-plus"></i> Invite friends</a></li>
-                                <hr />
-                                <li className="projects"><a href="#" onClick={handleShare}><i className="fa fa-share"></i> Share</a></li>
-                                <hr />
-                                <li className="contacts"><a href="#contact"><i className="fas fa-address-card"></i> Contact</a></li>
-                                <hr />
-                            </ul>
-                        </div>
-                    </nav>
-                    <a href="#" className="logo">Wayfinderreads</a>
-                    <div className="search-bar">
-                        <input
-                            type="text"
-                            placeholder="Search for books..."
-                            className="search-input"
-                            onChange={(e) => handleSearch(e.target.value)}
-                            style={{
-                                color: "#00000f"
-                            }}
-                        />
-                        <i className="bx bx-search search-icon"></i>
-                    </div>
-                    <i className="bx bx-shopping-bag" id="cart-icon" data-quantity="0" onClick={toggleCart}></i>
-                </div>
-            </header>
-
             <Router>
                 <Routes>
                     <Route path="/" element={
@@ -174,7 +130,7 @@ const videoSources = [
             {fullscreenIframe && (
                 <div className="fullscreen-exit" onClick={exitFullscreen}>Exit</div>
             )}
-<audio src={Music} autoPlay></audio>
+<audio src={Music} autoPlay />
 
 
             {/* Video iframe list at the bottom */}
