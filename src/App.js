@@ -183,7 +183,7 @@ const videoSources = [
             <div className="contact-section">
                 <p>Contact us!</p>
                 <p>Email: <a href="mailto:davidoluwaseun874@gmail.com">davidoluwaseun874@gmail.com</a></p>
-                <p>Phone: <a href="tel:+2348087846847"><a/>+2348087846847</p>
+                <p>Phone: <a href="tel:+2348087846847">+2348087846847</a></p>
             </div>
 
 
