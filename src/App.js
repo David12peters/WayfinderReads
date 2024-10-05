@@ -9,6 +9,29 @@ const App = () => {
     const [fullscreenIframe, setFullscreenIframe] = useState(false);
     const [isMinimized, setIsMinimized] = useState(true);
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+const [isLoaded, setIsLoaded] = useState(false); // Tracks when everything is fully loaded
+
+
+  useEffect(() => {
+    // Wait for the DOM and resources to be completely loaded
+    const handleLoad = () => {
+      setIsLoaded(true);
+    };
+
+
+    // Check if document is already loaded
+    if (document.readyState === 'complete') {
+      setIsLoaded(true);
+    } else {
+      window.addEventListener('load', handleLoad);
+    }
+
+
+    // Cleanup the event listener
+    return () => {
+      window.removeEventListener('load', handleLoad);
+    };
+  }, []);
 
 
     // Dummy data for products (assuming this is fetched or passed in reality)
@@ -142,12 +165,25 @@ const videoSources = [
                 )}
             </div>
 
+      {!isLoaded ? (
+        <div className="loader">Loading...</div> // Display a loader while loading
+      ) : (
+        <div className="content">
+          {/* Your iframe or other content */}
+          <iframe
+            src="https://david12peters.github.io/OGM_LOGO/index.html"
+            width="100%"
+            height="600px"
+            title="PDF Document"
+          />
+        </div>
+      )}
 
             {/* Floating Contact Section */}
             <div className="contact-section">
                 <p>Contact us!</p>
-                <p>Email: contact@example.com</p>
-                <p>Phone: +123456789</p>
+                <p>Email: <a href="mailto:davidoluwaseun874@gmail.com">davidoluwaseun874@gmail.com</a></p>
+                <p>Phone: <a href="tel:+2348087846847"><a/>+2348087846847</p>
             </div>
 
 
