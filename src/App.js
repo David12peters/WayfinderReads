@@ -25,28 +25,6 @@ const [isActive, setIsActive] = useState(false);
     const headerRef = useRef(null);
     const navigate = useNavigate();
     const [isProcessing, setIsProcessing] = useState(false);
-    const [isLoaded, setIsLoaded] = useState(false); // 
-
-useEffect(() => {
-    // Wait for the DOM and resources to be completely loaded
-    const handleLoad = () => {
-      setIsLoaded(true);
-    };
-
-
-    // Check if document is already loaded
-    if (document.readyState === 'complete') {
-      setIsLoaded(true);
-    } else {
-      window.addEventListener('load', handleLoad);
-    }
-
-
-    // Cleanup the event listener
-    return () => {
-      window.removeEventListener('load', handleLoad);
-    };
-  }, []);
     
     // Array of iframe video sources
 const videoSources = [
