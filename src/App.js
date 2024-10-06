@@ -25,17 +25,9 @@ const [isActive, setIsActive] = useState(false);
     const headerRef = useRef(null);
     const navigate = useNavigate();
     const [isProcessing, setIsProcessing] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false); // 
 
 
-
-
-
-
-
-
-
-
-    
     
     // Array of iframe video sources
 const videoSources = [
