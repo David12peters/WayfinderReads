@@ -14,16 +14,55 @@ import { Analytics } from '@vercel/analytics/react';  // Import Vercel Analytics
 import Music from './assets/Romans.mp3';
 
 function App() {
-    const [isActive, setIsActive] = useState(false);
+    
+const [isActive, setIsActive] = useState(false);
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0);
     const [displayedProducts, setDisplayedProducts] = useState([]);
     const [fullscreenIframe, setFullscreenIframe] = useState(null);
+    const [isMinimized, setIsMinimized] = useState(true);
+    const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const iframeRef = useRef(null); // To hold the reference to the iframe element
     const infoPanelRef = useRef(null);
     const headerRef = useRef(null);
+    const navigate = useNavigate();
+    const [isProcessing, setIsProcessing] = useState(false);
 
 
+
+
+
+
+
+
+
+
+    
+    
+    // Array of iframe video sources
+const videoSources = [
+    'https://www.youtube.com/embed/JxOuQxq5AOg?si=MBBCrqRAVjza4P7i',
+    'https://www.youtube.com/embed/bwD99EqbTKQ?si=-f6L6QX3Xrgz_-Hv',
+    'https://www.youtube.com/embed/rnHldmO4vdk?si=5wEyWNlcwt_4lzN1',
+    'https://www.youtube.com/embed/J6OTCWSurYQ?si=3D5zWsloCKFnwc-J',
+    'https://www.youtube.com/embed/ujqiec1bAds?si=oqw-5FZ-8p-hfIWb',
+    'https://www.youtube.com/embed/25LO-SCcD4c?si=LHy-zjQExf4QswaN',
+    'https://www.youtube.com/embed/25LO-SCcD4c?si=sPx7A2oMikPdLp_5',
+    'https://www.youtube.com/embed/l7C4_v4Lnxc?si=lqt2aVK__4wBUupj',
+  ];
+
+
+
+
+  useEffect(() => {
+    // Cycle through the videos every 30 minutes
+    const videoInterval = setInterval(() => {
+      setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videoSources.length);
+    }, 1800000); // 30 minutes in milliseconds
+
+
+    return () => clearInterval(videoInterval);
+  }, [videoSources]);
 
 
     const products = [
@@ -51,37 +90,24 @@ function App() {
         { id: 22, title: 'Reaching the Lost: Evangelism by Bobby Jamieson', price: '$2', url: 'https://drive.google.com/file/d/1VdeGyq6trG9MXm7Z5DHpzzmD8h_brjBs/preview?usp=embed_googleplus' },
         { id: 23, title: 'The Emojis', price: '$2', url: 'https://drive.google.com/file/d/1mZ2mxVk3CXirbmDinOivE0Dl_0Oqv2c5/preview?usp=embed_googleplus' },
         { id: 24, title: 'The Miracle Seed - David O. Oyedepo', price: '$2', url: 'https://drive.google.com/file/d/1VqxfulKcacCH8b3zo59BPp9JzFRJwnxr/preview?usp=embed_googleplus' },
-        { id: 25, title: 'The Visions', price: '$2', url: 'https://drive.google.com/file/d/1mZsoV1v90jWnKLpTHUdJIYl4cM89UE8t/preview?usp=embed_googleplus' },
-        { id: 26, title: 'The Price of God\'s Miracle Working Power', price: '$2', url: 'https://drive.google.com/file/d/1VO3UnQpbXj9YhxZz4TxfgUXtQbcO8ix3/preview?usp=embed_googleplus' },
-        { id: 27, title: 'The Principles & Power of Vision', price: '$2', url: 'https://drive.google.com/file/d/1VP29lAo7H95ptj3zTFeMVgLvCTF3DBuB/preview?usp=embed_googleplus' },
-        { id: 28, title: 'Walking in Dominion', price: '$2', url: 'https://drive.google.com/file/d/1Vfa08qGDaO-e6HUNWnKwVfOufRT92J8M/preview?usp=embed_googleplus' },
-        { id: 29, title: 'Walking in Financial Dominion', price: '$2', url: 'https://drive.google.com/file/d/1ViPrXgdh3uXAZnHnZyBmbQ1_4SeKKpqw/preview?usp=embed_googleplus' },
-    ];
+        { id: 25, title: 'The Visions', price: '$2', url: 'https://drive.google.com/file/d/1mZsoV1v90jWnKLpTHUdJIYl4zM89UE8t/preview' },
+        { id: 26, title: 'The Price of Greatness - Nicholas Duncan-Williams', price: '$2', url: 'https://drive.google.com/file/d/1VrLF9Hd_Gz2Tt0rTTTk2Rx7mhB9vc652/preview?usp=embed_googleplus' },
+        { id: 27, title: 'Understanding the Power of Praise - David Oyedepo', price: '$2', url: 'https://drive.google.com/file/d/1VsxkhQIYxudXg7V8T22OQaiASaf51PrB/preview?usp=embed_googleplus' },
+        { id: 28, title: 'When God Writes Your Love Story (Expanded Edition)', price: '$2', url: 'https://drive.google.com/file/d/1Vzgd7I5j8D0es32t4Qlm5LffDx-0cHfG/preview?usp=embed_googleplus' },
+        { id: 29, title: 'Who is this Allah? - GJO Moshay', price: '$2', url: 'https://drive.google.com/file/d/1W0iafNZs0oN9_yMStU94-AzFWqCM2zxr/preview?usp=embed_googleplus' },
+        { id: 30, title: 'Why You Act the Way You Do - Tim Lahaye', price: '$2', url: 'https://drive.google.com/file/d/1W8nmBicW3uUq8BPEpeq2u0p_qvP-mvXO/preview?usp=embed_googleplus' }
+         
+        ];
 
 
-
-
+    // Function to load products initially
     useEffect(() => {
         setDisplayedProducts(products);
-        const storedCartItems = localStorage.getItem('cartItems');
-        const storedTotal = localStorage.getItem('total');
-        if (storedCartItems) setCartItems(JSON.parse(storedCartItems));
-        if (storedTotal) setTotal(parseFloat(storedTotal));
     }, []);
 
 
-
-
-    useEffect(() => {
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
-        localStorage.setItem('total', total.toFixed(2));
-    }, [cartItems, total]);
-
-
-
-
-    const handleSearch = (e) => {
-        const query = e.target.value;
+    // Function to filter products based on search query
+    const handleSearch = (query) => {
         const filteredProducts = products.filter(product =>
             product.title.toLowerCase().includes(query.toLowerCase())
         );
@@ -89,82 +115,337 @@ function App() {
     };
 
 
-
-
-    const addToCart = (product) => {
-        const existingItem = cartItems.find(item => item.id === product.id);
-        if (existingItem) {
-            const updatedCartItems = cartItems.map(item =>
-                item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-            );
-            setCartItems(updatedCartItems);
-            setTotal(total + parseFloat(product.price.slice(1)));
-        } else {
-            const newCartItem = { ...product, quantity: 1 };
-            setCartItems([...cartItems, newCartItem]);
-            setTotal(total + parseFloat(product.price.slice(1)));
-        }
+    // Fullscreen functionality for the iframe
+    const handleRead = (iframeId) => {
+        setFullscreenIframe(iframeId);
     };
 
 
-
-
-    const removeFromCart = (product) => {
-        const updatedCartItems = cartItems.filter(item => item.id !== product.id);
-        setCartItems(updatedCartItems);
-        setTotal(total - (product.quantity * parseFloat(product.price.slice(1))));
-    };
-
-
-
-
-    const handleFlutterPayment = useFlutterwave({
-        public_key: 'FLWPUBK_TEST-SANDBOXDEMOKEY-X',
-        tx_ref: Date.now(),
-        amount: total * 1700, // Convert total from USD to NGN
-        currency: 'NGN',
-        payment_options: 'card,banktransfer,ussd',
-        customer: {
-            email: 'example@gmail.com',
-            phone_number: '08102909304',
-            name: 'John Doe',
-        },
-        customizations: {
-            title: 'Book Store',
-            description: 'Payment for items in cart',
-            logo: ProductImgLogo, // Ensure this is the correct URL path to the logo
-        },
-    });
-
-
-
-
-    const showIframeFullscreen = (iframeUrl) => {
-        setFullscreenIframe(iframeUrl);
-    };
-
-
-
-
-    const hideIframeFullscreen = () => {
-        setFullscreenIframe(null);
+    const exitFullscreen = () => {
+        setFullscreenIframe(null); // Exit fullscreen mode
     };
 
 
 
 
     const option = () => {
-        const header = headerRef.current;
-        header.style.height = 'auto';
+        const infoPanel = infoPanelRef.current;
+        if (infoPanel) {
+            infoPanel.style.display = 'block';
+        }
+        headerRef.style.height = '600px'
     };
-
-
 
 
     const hideInfoPanel = () => {
         const infoPanel = infoPanelRef.current;
-        infoPanel.style.display = 'none';
+        if (infoPanel) {
+            infoPanel.style.display = 'none';
+        }
+        headerRef.style.height = '150px'
     };
+
+
+    
+
+
+    const handleShare = () => {
+        if (navigator.share) {
+            navigator.share({
+                title: 'Check out this book!',
+                url: window.location.href
+            }).catch(console.error);
+        } else {
+            alert("Sharing is not supported in your browser.");
+        }
+    };
+
+
+    const handleContact = () => {
+        // Scroll to contact section or open a modal
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+            contactSection.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            window.location.href = "mailto:davidoluwaseun874@gmail.com"; // Update with the actual email
+        }
+    };
+
+
+    // Cart logic: Load, save, and handle updates
+    const saveCartItems = (items) => {
+        localStorage.setItem('cartItems', JSON.stringify(items));
+    };
+
+
+    
+const loadCartItems = () => {
+        const storedItems = localStorage.getItem('cartItems');
+        const storedTotal = localStorage.getItem('cartTotal');
+
+
+        if (storedItems) {
+            setCartItems(JSON.parse(storedItems));
+        }
+        if (storedTotal) {
+            setTotal(parseFloat(storedTotal));
+        }
+    };
+
+
+    const calculateTotal = (items) => {
+        const newTotal = items.reduce((acc, item) => {
+            return acc + parseFloat(item.price.replace('$', '')) * item.quantity;
+        }, 0);
+        setTotal(newTotal);
+        localStorage.setItem('cartTotal', newTotal.toFixed(2));
+    };
+
+
+    const addProductToCart = (product) => {
+        const existingItem = cartItems.find(item => item.id === product.id);
+        if (existingItem) {
+            alert('This item is already in the cart');
+        } else {
+            const newItems = [...cartItems, { ...product, quantity: 1 }];
+            setCartItems(newItems);
+            saveCartItems(newItems);
+            calculateTotal(newItems);
+        }
+    };
+
+
+    const removeProductFromCart = (productId) => {
+        const newItems = cartItems.filter(item => item.id !== productId);
+        setCartItems(newItems);
+        saveCartItems(newItems);
+        calculateTotal(newItems);
+    };
+
+
+    const updateProductQuantity = (productId, quantity) => {
+        if (quantity < 1) return;
+        const newItems = cartItems.map(item =>
+            item.id === productId ? { ...item, quantity } : item
+        );
+        setCartItems(newItems);
+        saveCartItems(newItems);
+        calculateTotal(newItems);
+    };
+
+
+    // Toggles the cart visibility
+    const toggleCart = () => {
+        setIsActive(!isActive);
+    };
+
+
+    const getTotalQuantity = () => {
+        return cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    };
+
+
+    useEffect(() => {
+        loadCartItems();
+    }, []);
+    
+    useEffect(() => {
+        // Update the cart icon's data-quantity attribute
+        const cartIcon = document.getElementById('cart-icon');
+        if (cartIcon) {
+            cartIcon.setAttribute('data-quantity', getTotalQuantity());
+        }
+    }, [cartItems]);
+
+
+
+
+
+
+    const config = {
+        public_key: process.env.REACT_APP_FLUTTERWAVE_PUBLIC_KEY,
+        tx_ref: Date.now(),
+        amount: total.toFixed(2) * 1700,
+        currency: 'NGN',
+        payment_options: 'card,mobilemoney,ussd',
+        customer: {
+          email: 'davidoluwaseun874@gmail.com',
+           phone_number: '08087846847',
+          name: 'David Peters',
+        },
+        customizations: {
+          title: 'Books Purchase',
+          description: 'Payment for items bought in cart',
+          logo: {ProductImgLogo},
+        },
+      };
+    
+      const handleFlutterPayment = useFlutterwave(config);
+
+
+  const handlePaymentSuccess = (response) => {
+    console.log("Payment Successful:", response);
+    // Verify payment on the server to ensure it's valid
+    closePaymentModal(); // Closes the payment modal programmatically
+    navigate("/success"); // Redirect to SuccessPage after payment
+  };
+
+
+  const handlePaymentFailure = (response) => {
+    console.log("Payment Failed or Cancelled:", response);
+    closePaymentModal(); // Closes the payment modal programmatically
+    navigate("/cancel"); // Redirect to CancelPage after failure
+  };
+
+
+  const handlePayment = () => {
+    setIsProcessing(true); // Show loading state during payment process
+    handleFlutterPayment({
+      callback: (response) => {
+        if (response.status === "successful") {
+          handlePaymentSuccess(response);
+        } else {
+          handlePaymentFailure(response);
+        }
+      },
+      onClose: () => {
+        // Handle case where user closes the modal without completing payment
+        console.log("Payment modal closed without completing the transaction.");
+        handlePaymentFailure();
+      },
+    });
+  };
+
+    return (
+        <div className="app">
+            <Router>
+                <Routes>
+                    <Route path="/" element={
+                        <section>
+                            <div className="products-container">
+                                {products.map((product, index) => (
+                                    <div className="product" key={index}>
+                                        <div className="product-image">
+                                            <img src={product.image} alt={product.title} />
+                                            <a href="#cart">
+                                                <img
+                                                    src="small-overlay-image.png"
+                                                    alt="Overlay"
+                                                    style={{
+                                                        position: 'absolute',
+                                                        top: 0,
+                                                        right: 0,
+                                                        width: '50px',
+                                                        height: '50px',
+                                                        borderRadius: '50%',
+                                                        zIndex: 1
+                                                    }}
+                                                />
+                                            </a>
+                                        </div>
+                                        <h2 className="product-title">{product.title}</h2>
+                                        <span className="price">{product.price}</span>
+                                        <button className="btn-read" onClick={() => handleRead(`iframe-${index}`)}>
+                                            Read <i className="fa-solid fa-book"></i>
+                                        </button>
+                                        <i className="bx bx-shopping-bag add-cart" onClick={() => addProductToCart(product)}></i>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    } />
+                    <Route path="/cancel" element={<CancelPage />} />
+                    <Route path="/success" element={<SuccessPage />} />
+                </Routes>
+            </Router>
+
+
+            {fullscreenIframe && (
+                <div className="fullscreen-exit" onClick={exitFullscreen}>Exit</div>
+            )}
+<audio src={Music} autoPlay />
+
+
+            {/* Video iframe list at the bottom */}
+            <div className="iframe-sec-container">
+                {videoSources.map((source, index) => (
+                    <iframe
+                        key={index}
+                        src={source}
+                        title={`Video ${index + 1}`}
+                        allow="autoplay"
+                        className={`video-frame ${index === currentVideoIndex ? 'active' : ''}`}
+                        allowFullScreen
+                    ></iframe>
+                ))}
+            </div>
+
+
+            {/* Video icon that toggles between minimized and maximized */}
+            <div className={`video-icon ${isMinimized ? 'minimized' : 'expanded'}`}>
+                {isMinimized ? (
+                    <button className="toggle-button" onClick={() => setIsMinimized(false)}>Open Video</button>
+                ) : (
+                    <div className="expanded-video-container">
+                        <iframe
+                            src={videoSources[currentVideoIndex]}
+                            title="Playing Video"
+                            allowFullScreen
+                            className="expanded-video"
+                        ></iframe>
+                        <button className="toggle-button" onClick={() => setIsMinimized(true)}>Minimize</button>
+                    </div>
+                )}
+            </div>
+
+      {!isLoaded ? (
+        <div className="loader">Loading...</div> // Display a loader while loading
+      ) : (
+        <div className="content">
+          {/* Your iframe or other content */}
+          <iframe
+            src="https://david12peters.github.io/OGM_LOGO/index.html"
+            width="100%"
+            height="600px"
+            title="PDF Document"
+          />
+        </div>
+      )}
+
+            {/* Floating Contact Section */}
+            <div className="contact-section">
+                <p>Contact us!</p>
+                <p>Email: <a href="mailto:davidoluwaseun874@gmail.com">davidoluwaseun874@gmail.com</a></p>
+                <p>Phone: <a href="tel:+2348087846847">+2348087846847</a></p>
+            </div>
+
+
+            <footer id="contact">
+                <h2>Contact Us</h2>
+                <p>Email: davidoluwaseun874@gmail.com <a href="mailto:davidoluwaseun874@gmail.com"><i className="fa-solid fa-envelope"></i></a></p>
+                <p>Whatsapp: <a href="https://wa.link/chjxqu"><i className="fab fa-whatsapp"></i></a></p>
+                <p>Facebook: <a href="https://www.facebook.com/profile.php?id=61551330303945&mibextid=ZbWKwL">
+                    <i className="fab fa-facebook-f"></i>
+                </a></p>
+                <p>Twitter: <a href="https://twitter.com/davidpeters874/">
+                    <i className="fab fa-twitter"></i>
+                </a></p>
+                <p>Instagram: <a href="https://www.instagram.com/davidpeters1098/">
+                    <i className="fab fa-instagram"></i>
+                </a></p>
+                <p>Youtube: <a href="https://youtube.com/@wayfinder728?si=iacxUCLgIsO7r3Ge" target="_blank" rel="noopener noreferrer">
+                    <i className="fab fa-youtube"></i>
+                </a></p>
+            </footer>
+
+
+            <Analytics />
+        </div>
+    );
+}
+
+
+export default App;
 
 
 
