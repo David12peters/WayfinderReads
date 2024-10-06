@@ -431,20 +431,7 @@ const loadCartItems = () => {
                 )}
             </div>
 
-      {!isLoaded ? (
-        <div className="loader">Loading...</div> // Display a loader while loading
-      ) : (
-        <div className="content">
-          {/* Your iframe or other content */}
-          <iframe
-            src="https://david12peters.github.io/OGM_LOGO/index.html"
-            width="100%"
-            height="600px"
-            title="PDF Document"
-          />
-        </div>
-      )}
-
+      
             {/* Floating Contact Section */}
             <div className="contact-section">
                 <p>Contact us!</p>
