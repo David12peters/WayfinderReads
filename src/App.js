@@ -249,60 +249,7 @@ const loadCartItems = () => {
 
 
 
-    const config = {
-        public_key: process.env.REACT_APP_FLUTTERWAVE_PUBLIC_KEY,
-        tx_ref: Date.now(),
-        amount: total.toFixed(2) * 1700,
-        currency: 'NGN',
-        payment_options: 'card,mobilemoney,ussd',
-        customer: {
-          email: 'davidoluwaseun874@gmail.com',
-           phone_number: '08087846847',
-          name: 'David Peters',
-        },
-        customizations: {
-          title: 'Books Purchase',
-          description: 'Payment for items bought in cart',
-          logo: ProductImgLogo,
-        },
-      };
     
-      const handleFlutterPayment = useFlutterwave(config);
-
-
-  const handlePaymentSuccess = (response) => {
-    console.log("Payment Successful:", response);
-    // Verify payment on the server to ensure it's valid
-    closePaymentModal(); // Closes the payment modal programmatically
-    navigate("/success"); // Redirect to SuccessPage after payment
-  };
-
-
-  const handlePaymentFailure = (response) => {
-    console.log("Payment Failed or Cancelled:", response);
-    closePaymentModal(); // Closes the payment modal programmatically
-    navigate("/cancel"); // Redirect to CancelPage after failure
-  };
-
-
-  const handlePayment = () => {
-    setIsProcessing(true); // Show loading state during payment process
-    handleFlutterPayment({
-      callback: (response) => {
-        if (response.status === "successful") {
-          handlePaymentSuccess(response);
-        } else {
-          handlePaymentFailure(response);
-        }
-      },
-      onClose: () => {
-        // Handle case where user closes the modal without completing payment
-        console.log("Payment modal closed without completing the transaction.");
-        handlePaymentFailure();
-      },
-    });
-  };
-
             
     return (
         <div className="app">
