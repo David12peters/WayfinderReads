@@ -103,10 +103,14 @@ const videoSources = [
 
     // Fullscreen functionality for the iframe
     const handleRead = (iframeId) => {
+    const iframeElement = document.getElementById(iframeId);
+    if (iframeElement) {
         setFullscreenIframe(true);
-        // Ensure the iframe with the given ID is displayed in fullscreen
-        document.getElementById(iframeId).requestFullscreen();
-    };
+        iframeElement.requestFullscreen();
+    } else {
+        console.error(`Iframe with ID ${iframeId} not found.`);
+    }
+};
 
 
     const exitFullscreen = () => {
@@ -116,12 +120,21 @@ const videoSources = [
 
 
     const option = () => {
-        const infoPanel = infoPanelRef.current;
-        if (infoPanel) {
-            infoPanel.style.display = 'block';
-        }
-        headerRef.style.height = '600px'
-    };
+    const infoPanel = infoPanelRef.current;
+    const header = headerRef.current;
+    if (infoPanel && header) {
+        infoPanel.style.display = 'block';
+        header.style.height = '600px';
+    }
+};
+
+const hideInfoPanel = () => {
+    const infoPanel = infoPanelRef.current;
+    const header = headerRef.current;
+    if (infoPanel && header) {
+        infoPanel.style.display = 'none';
+    }
+};
 
 
     const hideInfoPanel = () => {
