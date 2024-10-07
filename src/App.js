@@ -249,53 +249,64 @@ const loadCartItems = () => {
 
 
 
+    const config = {
+        public_key: process.env.REACT_APP_FLUTTERWAVE_PUBLIC_KEY,
+        tx_ref: Date.now(),
+        amount: total.toFixed(2) * 1700,
+        currency: 'NGN',
+        payment_options: 'card,mobilemoney,ussd',
+        customer: {
+          email: 'davidoluwaseun874@gmail.com',
+           phone_number: '08087846847',
+          name: 'David Peters',
+        },
+        customizations: {
+          title: 'Books Purchase',
+          description: 'Payment for items bought in cart',
+          logo: ProductImgLogo,
+        },
+      };
     
+      const handleFlutterPayment = useFlutterwave(config);
+
+
+  const handlePaymentSuccess = (response) => {
+    console.log("Payment Successful:", response);
+    // Verify payment on the server to ensure it's valid
+    closePaymentModal(); // Closes the payment modal programmatically
+    navigate("/success"); // Redirect to SuccessPage after payment
+  };
+
+
+  const handlePaymentFailure = (response) => {
+    console.log("Payment Failed or Cancelled:", response);
+    closePaymentModal(); // Closes the payment modal programmatically
+    navigate("/cancel"); // Redirect to CancelPage after failure
+  };
+
+
+  const handlePayment = () => {
+    setIsProcessing(true); // Show loading state during payment process
+    handleFlutterPayment({
+      callback: (response) => {
+        if (response.status === "successful") {
+          handlePaymentSuccess(response);
+        } else {
+          handlePaymentFailure(response);
+        }
+      },
+      onClose: () => {
+        // Handle case where user closes the modal without completing payment
+        console.log("Payment modal closed without completing the transaction.");
+        handlePaymentFailure();
+      },
+    });
+  };
+
             
     return (
         <div className="app">
 
-<header ref={headerRef}>
-                <div className="nav container">
-                    <nav>
-                        <div className="container">
-                            <div className="menu-toggle" onClick={option} >&#9776;</div>
-                            <ul id="largeul">
-                                <li className="projects">
-                                    <a href="#" onClick={handleShare} id="icons-l"><i className="fa fa-share"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#" onClick={handleContact} id="icons-l"><i className="fas fa-address-card"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div id="info-panel" className="info-panel" ref={infoPanelRef} >
-                            <div className="menu-exit" onClick={hideInfoPanel}>&times;</div>
-                            <ul>
-                                <li className="shareButton"><a href="#" onClick={handleContact}><i className="fa fa-user-plus"></i> Invite friends</a></li>
-                                <hr />
-                                <li className="projects"><a href="#" onClick={handleShare}><i className="fa fa-share"></i> Share</a></li>
-                                <hr />
-                                <li className="contacts"><a href="#contact"><i className="fas fa-address-card"></i> Contact</a></li>
-                                <hr />
-                            </ul>
-                        </div>
-                    </nav>
-                    <a href="#" className="logo">Wayfinderreads</a>
-                    <div className="search-bar">
-                        <input
-                            type="text"
-                            placeholder="Search for books..."
-                            className="search-input"
-                            onChange={(e) => handleSearch(e.target.value)}
-                            style={{
-                                color: "#00000f"
-                            }}
-                        />
-                        <i className="bx bx-search search-icon"></i>
-                    </div>
-                    <i className="bx bx-shopping-bag" id="cart-icon" data-quantity="0" onClick={toggleCart}></i>
-                </div>
-            </header>
 
         
             <Router>
