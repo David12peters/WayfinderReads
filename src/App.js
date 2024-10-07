@@ -263,7 +263,7 @@ const loadCartItems = () => {
         customizations: {
           title: 'Books Purchase',
           description: 'Payment for items bought in cart',
-          logo: {ProductImgLogo},
+          logo: ProductImgLogo,
         },
       };
     
