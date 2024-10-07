@@ -42,14 +42,13 @@ const videoSources = [
 
 
   useEffect(() => {
-    // Cycle through the videos every 30 minutes
-    const videoInterval = setInterval(() => {
-      setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videoSources.length);
-    }, 1800000); // 30 minutes in milliseconds
+        const videoInterval = setInterval(() => {
+            setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videoSources.length);
+        }, 1800000); // 30 minutes
+        return () => clearInterval(videoInterval);
+    }, [videoSources.length]);
 
 
-    return () => clearInterval(videoInterval);
-  }, [videoSources]);
 
 
     const products = [
@@ -104,15 +103,16 @@ const videoSources = [
 
     // Fullscreen functionality for the iframe
     const handleRead = (iframeId) => {
-        setFullscreenIframe(iframeId);
+        setFullscreenIframe(true);
+        // Ensure the iframe with the given ID is displayed in fullscreen
+        document.getElementById(iframeId).requestFullscreen();
     };
 
 
     const exitFullscreen = () => {
-        setFullscreenIframe(null); // Exit fullscreen mode
+        setFullscreenIframe(false);
+        document.exitFullscreen();
     };
-
-
 
 
     const option = () => {
