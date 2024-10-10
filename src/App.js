@@ -137,15 +137,7 @@ const hideInfoPanel = () => {
 };
 
 
-    const hideInfoPanel = () => {
-        const infoPanel = infoPanelRef.current;
-        if (infoPanel) {
-            infoPanel.style.display = 'none';
-        }
-        headerRef.style.height = '150px'
-    };
-
-
+    
     
 
 
