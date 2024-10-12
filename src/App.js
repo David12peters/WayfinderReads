@@ -118,7 +118,7 @@ const videoSources = [
         document.exitFullscreen();
     };
 
-
+exitFullscreen()
     const option = () => {
     const infoPanel = infoPanelRef.current;
     const header = headerRef.current;
