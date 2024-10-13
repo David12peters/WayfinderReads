@@ -43,8 +43,7 @@ const videoSources = [
 
   useEffect(() => {
         const videoInterval = setInterval(() => {
-            setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videoSources.length);
-        }, 1800000); // 30 minutes
+            
         return () => clearInterval(videoInterval);
     }, [videoSources.length]);
 
@@ -94,8 +93,6 @@ const videoSources = [
 
     // Function to filter products based on search query
     const handleSearch = (query) => {
-        const filteredProducts = products.filter(product =>
-            product.title.toLowerCase().includes(query.toLowerCase())
         );
         setDisplayedProducts(filteredProducts);
     };
@@ -111,10 +108,6 @@ const videoSources = [
 
 
 const hideInfoPanel = () => {
-    const infoPanel = infoPanelRef.current;
-    const header = headerRef.current;
-    if (infoPanel && header) {
-        infoPanel.style.display = 'none';
     }
 };
 
@@ -124,25 +117,12 @@ const hideInfoPanel = () => {
 
 
     const handleShare = () => {
-        if (navigator.share) {
-            navigator.share({
-                title: 'Check out this book!',
-                url: window.location.href
-            }).catch(console.error);
-        } else {
-            alert("Sharing is not supported in your browser.");
         }
     };
 
 
     const handleContact = () => {
-        // Scroll to contact section or open a modal
-        const contactSection = document.getElementById('contact');
-        if (contactSection) {
-            contactSection.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            window.location.href = "mailto:davidoluwaseun874@gmail.com"; // Update with the actual email
-        }
+         }
     };
 
 
