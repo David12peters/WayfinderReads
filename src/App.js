@@ -100,6 +100,15 @@ const videoSources = [
         setDisplayedProducts(filteredProducts);
     };
 
+    // Fullscreen functionality for the iframe
+    const handleRead = (iframeId) => {
+        setFullscreenIframe(iframeId);
+    };
+
+    const exitFullscreen = () => {
+        setFullscreenIframe(null); // Exit fullscreen mode
+    };
+
 
 
 const hideInfoPanel = () => {
