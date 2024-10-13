@@ -106,7 +106,7 @@ const videoSources = [
 
 
 const hideInfoPanel = () => {
-    }
+    
 };
 
 
@@ -115,12 +115,12 @@ const hideInfoPanel = () => {
 
 
     const handleShare = () => {
-        }
+        
     };
 
 
     const handleContact = () => {
-         }
+         
     };
 
 
