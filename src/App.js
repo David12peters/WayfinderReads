@@ -7,6 +7,9 @@ import './assets/style.css';
 import ProductImgPray from './assets/Pray.jpg';
 import ProductImgLogo from './assets/Logo.png';
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
+import { Analytics } from '@vercel/analytics/react';
+
+
 
 function App() {
     const [isActive, setIsActive] = useState(false);
