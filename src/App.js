@@ -93,9 +93,7 @@ const videoSources = [
 
     // Function to filter products based on search query
     const handleSearch = (query) => {
-        );
-        setDisplayedProducts(filteredProducts);
-    };
+         };
 
     // Fullscreen functionality for the iframe
     const handleRead = (iframeId) => {;
