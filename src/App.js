@@ -1,33 +1,26 @@
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
+import CancelPage from './components/CancelPage';
+import SuccessPage from './components/SuccessPage';
 import './assets/style.css';
 import ProductImgPray from './assets/Pray.jpg';
 import ProductImgLogo from './assets/Logo.png';
-import CancelPage from './components/CancelPage';
-import SuccessPage from './components/SuccessPage';
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
-import { useNavigate } from "react-router-dom";
-import { Analytics } from '@vercel/analytics/react';  
-
-
-
-const App = () => {
+import Music from './assets/Romans.aac'
+function App() {
     const [isActive, setIsActive] = useState(false);
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0);
     const [displayedProducts, setDisplayedProducts] = useState([]);
     const [fullscreenIframe, setFullscreenIframe] = useState(null);
-    const [isMinimized, setIsMinimized] = useState(true);
-    const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const iframeRef = useRef(null); // To hold the reference to the iframe element
     const infoPanelRef = useRef(null);
     const headerRef = useRef(null);
-    const navigate = useNavigate();
-    const [isProcessing, setIsProcessing] = useState(false);
-   
-    // Dummy data for products (assuming this is fetched or passed in reality)
+    const [isMinimized, setIsMinimized] = useState(true);
+    const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+
+
     const products = [
         { id: 1, title: 'Christ Jesus our royal highpriest', price: '$2', url: 'https://drive.google.com/file/d/1Sqe5wME6DAzXkv9Z21KQIP9QDlpEzIQz/preview?usp=embed_googleplus' },
         { id: 2, title: '21 Irrefutable Laws of LEADERSHIP', price: '$2', url: 'https://drive.google.com/file/d/1T-F_th0WpJuq0b_KeQwo7hu1B5vKkKv6/preview?usp=embed_googleplus' },
@@ -53,7 +46,7 @@ const App = () => {
         { id: 22, title: 'Reaching the Lost: Evangelism by Bobby Jamieson', price: '$2', url: 'https://drive.google.com/file/d/1VdeGyq6trG9MXm7Z5DHpzzmD8h_brjBs/preview?usp=embed_googleplus' },
         { id: 23, title: 'The Emojis', price: '$2', url: 'https://drive.google.com/file/d/1mZ2mxVk3CXirbmDinOivE0Dl_0Oqv2c5/preview?usp=embed_googleplus' },
         { id: 24, title: 'The Miracle Seed - David O. Oyedepo', price: '$2', url: 'https://drive.google.com/file/d/1VqxfulKcacCH8b3zo59BPp9JzFRJwnxr/preview?usp=embed_googleplus' },
-        { id: 25, title: 'The Visions', price: '$2', url: 'https://drive.google.com/file/d/1mZsoV1v90jWnKLpTHUdJIYl4zM89UE8t/preview' },
+        { id: 25, title: 'The Visions', price: '$2', url: 'https://drive.google.com/file/d/1mZsoV1v90jWnKLpTHUdJIYl4cM89UE8t/preview?usp=embed_googleplus' },
         { id: 26, title: 'The Price of Greatness - Nicholas Duncan-Williams', price: '$2', url: 'https://drive.google.com/file/d/1VrLF9Hd_Gz2Tt0rTTTk2Rx7mhB9vc652/preview?usp=embed_googleplus' },
         { id: 27, title: 'Understanding the Power of Praise - David Oyedepo', price: '$2', url: 'https://drive.google.com/file/d/1VsxkhQIYxudXg7V8T22OQaiASaf51PrB/preview?usp=embed_googleplus' },
         { id: 28, title: 'When God Writes Your Love Story (Expanded Edition)', price: '$2', url: 'https://drive.google.com/file/d/1Vzgd7I5j8D0es32t4Qlm5LffDx-0cHfG/preview?usp=embed_googleplus' },
@@ -61,6 +54,35 @@ const App = () => {
         { id: 30, title: 'Why You Act the Way You Do - Tim Lahaye', price: '$2', url: 'https://drive.google.com/file/d/1W8nmBicW3uUq8BPEpeq2u0p_qvP-mvXO/preview?usp=embed_googleplus' }
          
         ];
+
+
+
+
+
+
+    // Video sources
+    const videoSources = [
+        'https://www.youtube.com/embed/dQw4w9WgXcQ', // Video 1
+        'https://www.youtube.com/embed/9bZkp7q19f0',  // Video 2
+        // Add more video sources here
+    ];
+
+
+
+
+    // Function to switch video every 30 minutes
+    useEffect(() => {
+        const videoInterval = setInterval(() => {
+            setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videoSources.length);
+        }, 1800000); // 30 minutes
+        return () => clearInterval(videoInterval);
+    }, [videoSources.length]);
+
+
+
+
+
+
 
 
     // Function to load products initially
@@ -78,46 +100,19 @@ const App = () => {
     };
 
 
-
-            
-    
-    // Array of iframe video sources
-const videoSources = [
-    'https://www.youtube.com/embed/JxOuQxq5AOg?si=MBBCrqRAVjza4P7i',
-    'https://www.youtube.com/embed/bwD99EqbTKQ?si=-f6L6QX3Xrgz_-Hv',
-    'https://www.youtube.com/embed/rnHldmO4vdk?si=5wEyWNlcwt_4lzN1',
-    'https://www.youtube.com/embed/J6OTCWSurYQ?si=3D5zWsloCKFnwc-J',
-    'https://www.youtube.com/embed/ujqiec1bAds?si=oqw-5FZ-8p-hfIWb',
-    'https://www.youtube.com/embed/25LO-SCcD4c?si=LHy-zjQExf4QswaN',
-    'https://www.youtube.com/embed/25LO-SCcD4c?si=sPx7A2oMikPdLp_5',
-    'https://www.youtube.com/embed/l7C4_v4Lnxc?si=lqt2aVK__4wBUupj',
-  ];
-
-
-
-    // Function to switch video every 30 minutes
-    useEffect(() => {
-        const videoInterval = setInterval(() => {
-            setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videoSources.length);
-        }, 1800000); // 30 minutes
-        return () => clearInterval(videoInterval);
-    }, [videoSources.length]);
-
-
+    // Fullscreen functionality for the iframe
     const handleRead = (iframeId) => {
-        setFullscreenIframe(true);
-        // Ensure the iframe with the given ID is displayed in fullscreen
-        document.getElementById(iframeId).requestFullscreen();
+        setFullscreenIframe(iframeId);
     };
 
 
     const exitFullscreen = () => {
-        setFullscreenIframe(false);
-        document.exitFullscreen();
+        setFullscreenIframe(null); // Exit fullscreen mode
     };
 
 
-    
+
+
     const option = () => {
         const infoPanel = infoPanelRef.current;
         if (infoPanel) {
@@ -128,8 +123,7 @@ const videoSources = [
 
 
     const hideInfoPanel = () => {
-
-const infoPanel = infoPanelRef.current;
+        const infoPanel = infoPanelRef.current;
         if (infoPanel) {
             infoPanel.style.display = 'none';
         }
@@ -169,7 +163,7 @@ const infoPanel = infoPanelRef.current;
     };
 
 
-   const loadCartItems = () => {
+    const loadCartItems = () => {
         const storedItems = localStorage.getItem('cartItems');
         const storedTotal = localStorage.getItem('cartTotal');
 
@@ -209,8 +203,7 @@ const infoPanel = infoPanelRef.current;
         const newItems = cartItems.filter(item => item.id !== productId);
         setCartItems(newItems);
         saveCartItems(newItems);
-
-calculateTotal(newItems);
+        calculateTotal(newItems);
     };
 
 
@@ -254,7 +247,7 @@ calculateTotal(newItems);
 
 
     const config = {
-        public_key: process.env.REACT_APP_FLUTTERWAVE_PUBLIC_KEY,
+        public_key: process.env.REACT_APP_PUBLIC_KEY,
         tx_ref: Date.now(),
         amount: total.toFixed(2) * 1700,
         currency: 'NGN',
@@ -270,35 +263,141 @@ calculateTotal(newItems);
           logo: {ProductImgLogo},
         },
       };
+    
+      const handleFlutterPayment = useFlutterwave(config);
 
 
 
-      return (
-        <div className="app">
+
+
+
+
+
+
+
+    return (
+        <div className="App">
+            <header ref={headerRef}>
+                <div className="nav container">
+                    <nav>
+                        <div className="container">
+                            <div className="menu-toggle" onClick={option} >&#9776;</div>
+                            <ul id="largeul">
+                                <li className="projects">
+                                    <a href="#" onClick={handleShare} id="icons-l"><i className="fa fa-share"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" onClick={handleContact} id="icons-l"><i className="fas fa-address-card"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="info-panel" className="info-panel" ref={infoPanelRef} >
+                            <div className="menu-exit" onClick={hideInfoPanel}>&times;</div>
+                            <ul>
+                                <li className="shareButton"><a href="#" onClick={handleContact}><i className="fa fa-user-plus"></i> Invite friends</a></li>
+                                <hr />
+                                <li className="projects"><a href="#" onClick={handleShare}><i className="fa fa-share"></i> Share</a></li>
+                                <hr />
+                                <li className="contacts"><a href="#contact"><i className="fas fa-address-card"></i> Contact</a></li>
+                                <hr />
+                            </ul>
+                        </div>
+                    </nav>
+                    <a href="#" className="logo">Wayfinderreads</a>
+                    <div className="search-bar">
+                        <input
+                            type="text"
+                            placeholder="Search for books..."
+                            className="search-input"
+                            onChange={(e) => handleSearch(e.target.value)}
+                        />
+                        <i className="bx bx-search search-icon"></i>
+                    </div>
+                    <i className="bx bx-shopping-bag" id="cart-icon" data-quantity="0" onClick={toggleCart}></i>
+                </div>
+            </header>
+
+
+            <div className={`cart ${isActive ? 'active' : ''}`}>
+                <h2 className="cart-title">Your Cart</h2>
+                <div className="cart-content">
+                    {cartItems.map((item, index) => (
+                        <div key={index} className="cart-box">
+                            <a id="cartImLink" ><iframe src={item.url} alt="" className="cart-img" /></a>
+                            <div className="detail-box">
+                                <div className="cart-product-title">{item.title}</div>
+                                <div className="cart-price">{item.price}</div>
+                                <input
+                                    type="number"
+                                    value={item.quantity}
+                                    className="cart-quantity"
+                                    onChange={(e) => updateProductQuantity(item.id, parseInt(e.target.value))}
+                                />
+                            </div>
+                            <i className="bx bx-trash-alt cart-remove" onClick={() => removeProductFromCart(item.id)}></i>
+                        </div>
+                    ))}
+                </div>
+                <div className="total">
+                    <div className="total-title">Total</div>
+                    <div className="total-price">NGN{total.toFixed(2) * 1700}</div>
+                </div>  <button
+        onClick={() => {
+          handleFlutterPayment({
+            callback: (response) => {
+              console.log(response);
+              closePaymentModal(); // close modal programmatically
+            },
+            onClose: () => {},
+          });
+        }}
+        onMouseOver={(e) => (e.target.style.backgroundColor = '#00796b')}
+        onMouseOut={(e) => (e.target.style.backgroundColor = '#009688')}
+        type="button" 
+        className='btn-buy'
+      >
+       Pay Now
+      </button>
+
+
+
+
+                <i className="bx bx-x" id="close-cart" onClick={toggleCart}></i>
+            <p>Please click on the whatsaap icon or any of our social media channels after payments for confirmation and delivery. Thank you!</p>
+            </div>
+
+
             <Router>
                 <Routes>
                     <Route path="/" element={
-                        <section>
+                        <section className="shop container">
+                            <h2 className="section-title"><i>Gearing Up</i></h2>
                             <div className="products-container">
-                                {products.map((product, index) => (
-                                    <div className="product" key={index}>
-                                        <div className="product-image">
-                                            <img src={product.image} alt={product.title} />
-                                            <a href="#cart">
-                                                <img
-                                                    src="small-overlay-image.png"
-                                                    alt="Overlay"
-                                                    style={{
-                                                        position: 'absolute',
-                                                        top: 0,
-                                                        right: 0,
-                                                        width: '50px',
-                                                        height: '50px',
-                                                        borderRadius: '50%',
-                                                        zIndex: 1
-                                                    }}
-                                                />
-                                            </a>
+                                {displayedProducts.map((product, index) => (
+                                    <div key={product.id} className="product-box">
+                                        <div className="iframe-container">
+                                            <iframe
+                                                id={`iframe-${index}`}
+                                                src={product.url}
+                                                title={product.title}
+                                                className={`product-frame ${fullscreenIframe === `iframe-${index}` ? 'fullscreen' : ''}`}
+                                                style={{ width: '100%', height: fullscreenIframe === `iframe-${index}` ? '100vh' : '300px', border: 'none' }}
+                                                ref={iframeRef}
+                                            />
+                                           <a href="https://david12peters.github.io/OGM_LOGO/index.html"> <img
+                                                src={ProductImgPray}
+                                                alt="Product Overlay"
+                                                className="product-overlay"
+                                                style={{
+                                                    position: 'absolute',
+                                                    top: '10px',
+                                                    right: '10px',
+                                                    width: '50px',
+                                                    height: '50px',
+                                                    borderRadius: '50%',
+                                                    zIndex: 1
+                                                }}
+                                            /></a>
                                         </div>
                                         <h2 className="product-title">{product.title}</h2>
                                         <span className="price">{product.price}</span>
@@ -307,8 +406,8 @@ calculateTotal(newItems);
                                         </button>
                                         <i className="bx bx-shopping-bag add-cart" onClick={() => addProductToCart(product)}></i>
                                     </div>
-                                ))}
-                            </div>
+                                
+                                    
                         </section>
                     } />
                     <Route path="/cancel" element={<CancelPage />} />
@@ -322,22 +421,7 @@ calculateTotal(newItems);
             )}
 
 
-            {/* Video iframe list at the bottom */}
-            <div className="iframe-sec-container">
-                {videoSources.map((source, index) => (
-                    <iframe
-                        key={index}
-                        src={source}
-                        title={`Video ${index + 1}`}
-                        allow="autoplay"
-                        className={`video-frame ${index === currentVideoIndex ? 'active' : ''}`}
-                        allowFullScreen
-                    ></iframe>
-                ))}
-            </div>
-
-
-            {/* Video icon that toggles between minimized and maximized */}
+{/* Video icon that toggles between minimized and maximized */}
             <div className={`video-icon ${isMinimized ? 'minimized' : 'expanded'}`}>
                 {isMinimized ? (
                     <button className="toggle-button" onClick={() => setIsMinimized(false)}>Open Video</button>
@@ -355,12 +439,16 @@ calculateTotal(newItems);
             </div>
 
 
+
+
             {/* Floating Contact Section */}
             <div className="contact-section">
                 <p>Contact us!</p>
                 <p>Email: contact@example.com</p>
                 <p>Phone: +123456789</p>
             </div>
+
+
 
 
             <footer id="contact">
@@ -382,10 +470,14 @@ calculateTotal(newItems);
             </footer>
 
 
+
+
             <Analytics />
         </div>
     );
 }
+
+
 
 
 export default App;
