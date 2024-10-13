@@ -213,12 +213,8 @@ const loadCartItems = () => {
 
 
 
-            
-    return (
+            return (
         <div className="app">
-
-
-        
             <Router>
                 <Routes>
                     <Route path="/" element={
@@ -264,7 +260,6 @@ const loadCartItems = () => {
             {fullscreenIframe && (
                 <div className="fullscreen-exit" onClick={exitFullscreen}>Exit</div>
             )}
-<audio src={Music} autoPlay />
 
 
             {/* Video iframe list at the bottom */}
@@ -299,12 +294,12 @@ const loadCartItems = () => {
                 )}
             </div>
 
-      
+
             {/* Floating Contact Section */}
             <div className="contact-section">
                 <p>Contact us!</p>
-                <p>Email: <a href="mailto:davidoluwaseun874@gmail.com">davidoluwaseun874@gmail.com</a></p>
-                <p>Phone: <a href="tel:+2348087846847">+2348087846847</a></p>
+                <p>Email: contact@example.com</p>
+                <p>Phone: +123456789</p>
             </div>
 
 
@@ -333,5 +328,5 @@ const loadCartItems = () => {
 }
 
 
-export default App
-
+export default App;
+                    
