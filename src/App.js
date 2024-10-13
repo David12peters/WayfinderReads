@@ -271,11 +271,7 @@ function App() {
 
 
 
-
-
-
-
-    return (
+return (
         <div className="App">
             <header ref={headerRef}>
                 <div className="nav container">
@@ -310,20 +306,36 @@ function App() {
                             placeholder="Search for books..."
                             className="search-input"
                             onChange={(e) => handleSearch(e.target.value)}
+                            style={{
+                                color: "#00000f"
+                            }}
                         />
                         <i className="bx bx-search search-icon"></i>
                     </div>
                     <i className="bx bx-shopping-bag" id="cart-icon" data-quantity="0" onClick={toggleCart}></i>
                 </div>
             </header>
-
-
-            <div className={`cart ${isActive ? 'active' : ''}`}>
+<div className={`cart ${isActive ? 'active' : ''}`}>
                 <h2 className="cart-title">Your Cart</h2>
                 <div className="cart-content">
                     {cartItems.map((item, index) => (
                         <div key={index} className="cart-box">
-                            <a id="cartImLink" ><iframe src={item.url} alt="" className="cart-img" /></a>
+                            <a id="cartImLink" ><iframe src={item.url} className="cart-img" title={item.title}></iframe>
+                            <img
+                                            src={ProductImgPray}
+                                            alt="Product Overlay"
+                                            className="product-overlay"
+                                            style={{
+                                                position: 'absolute',
+                                                top: '10px',
+                                                right: '10px',
+                                                width: '50px',
+                                                height: '50px',
+                                                borderRadius: '50%',
+                                                zIndex: 1
+                                            }}
+                                        />
+                            </a>
                             <div className="detail-box">
                                 <div className="cart-product-title">{item.title}</div>
                                 <div className="cart-price">{item.price}</div>
@@ -363,7 +375,6 @@ function App() {
 
 
                 <i className="bx bx-x" id="close-cart" onClick={toggleCart}></i>
-            <p>Please click on the whatsaap icon or any of our social media channels after payments for confirmation and delivery. Thank you!</p>
             </div>
 
 
@@ -371,20 +382,20 @@ function App() {
                 <Routes>
                     <Route path="/" element={
                         <section className="shop container">
-                            <h2 className="section-title"><i>Gearing Up</i></h2>
-                            <div className="products-container">
-                                {displayedProducts.map((product, index) => (
-                                    <div key={product.id} className="product-box">
-                                        <div className="iframe-container">
-                                            <iframe
-                                                id={`iframe-${index}`}
-                                                src={product.url}
-                                                title={product.title}
-                                                className={`product-frame ${fullscreenIframe === `iframe-${index}` ? 'fullscreen' : ''}`}
-                                                style={{ width: '100%', height: fullscreenIframe === `iframe-${index}` ? '100vh' : '300px', border: 'none' }}
-                                                ref={iframeRef}
-                                            />
-                                           <a href="https://david12peters.github.io/OGM_LOGO/index.html"> <img
+                        <h2 className="section-title"><i>Gearing Up</i></h2>
+                        <div className="products-container">
+                            {displayedProducts.map((product, index) => (
+                                <div key={product.id} className="product-box">
+                                    <div className="iframe-container">
+                                        <iframe
+                                            id={`iframe-${index}`}
+                                            src={product.url}
+                                            title={product.title}
+                                            className={`product-frame ${fullscreenIframe === `iframe-${index}` ? 'fullscreen' : ''}`}
+                                            style={{ width: '100%', height: fullscreenIframe === `iframe-${index}` ? '100vh' : '300px', border: 'none' }}
+                                            ref={iframeRef}
+                                        />
+                                        <a href="https://david12peters.github.io/OGM_LOGO/index.html"> <img
                                                 src={ProductImgPray}
                                                 alt="Product Overlay"
                                                 className="product-overlay"
@@ -398,20 +409,21 @@ function App() {
                                                     zIndex: 1
                                                 }}
                                             /></a>
-                                        </div>
-                                        <h2 className="product-title">{product.title}</h2>
-                                        <span className="price">{product.price}</span>
-                                        <button className="btn-read" onClick={() => handleRead(`iframe-${index}`)}>
-                                            Read <i className="fa-solid fa-book"></i>
-                                        </button>
-                                        <i className="bx bx-shopping-bag add-cart" onClick={() => addProductToCart(product)}></i>
                                     </div>
-                                
-                                    
-                        </section>
+                                    <h2 className="product-title">{product.title}</h2>
+                                    <span className="price">{product.price}</span>
+                                    <button className="btn-read" onClick={() => handleRead(`iframe-${index}`)}>
+                                        Read <i className="fa-solid fa-book"></i>
+                                    </button>
+                                    <i className="bx bx-shopping-bag add-cart" onClick={() => addProductToCart(product)}></i>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                    
                     } />
-                    <Route path="/cancel" element={<CancelPage />} />
-                    <Route path="/success" element={<SuccessPage />} />
+                    <Route path="/cancel" element={<CancelPage />} /> {/* CancelPage Route */}
+                    <Route path="/success" element={<SuccessPage />} /> {/* SuccessPage Route */}
                 </Routes>
             </Router>
 
@@ -421,63 +433,102 @@ function App() {
             )}
 
 
-{/* Video icon that toggles between minimized and maximized */}
-            <div className={`video-icon ${isMinimized ? 'minimized' : 'expanded'}`}>
-                {isMinimized ? (
-                    <button className="toggle-button" onClick={() => setIsMinimized(false)}>Open Video</button>
-                ) : (
-                    <div className="expanded-video-container">
-                        <iframe
-                            src={videoSources[currentVideoIndex]}
-                            title="Playing Video"
-                            allowFullScreen
-                            className="expanded-video"
-                        ></iframe>
-                        <button className="toggle-button" onClick={() => setIsMinimized(true)}>Minimize</button>
-                    </div>
-                )}
-            </div>
 
 
 
 
-            {/* Floating Contact Section */}
-            <div className="contact-section">
-                <p>Contact us!</p>
-                <p>Email: contact@example.com</p>
-                <p>Phone: +123456789</p>
-            </div>
+                        {/*<audio src={Music} style={{
+    visibility: 'hidden'
+}} autoPlay loop></audio>*/}
 
 
 
 
-            <footer id="contact">
-                <h2>Contact Us</h2>
-                <p>Email: davidoluwaseun874@gmail.com <a href="mailto:davidoluwaseun874@gmail.com"><i className="fa-solid fa-envelope"></i></a></p>
-                <p>Whatsapp: <a href="https://wa.link/chjxqu"><i className="fab fa-whatsapp"></i></a></p>
-                <p>Facebook: <a href="https://www.facebook.com/profile.php?id=61551330303945&mibextid=ZbWKwL">
-                    <i className="fab fa-facebook-f"></i>
-                </a></p>
-                <p>Twitter: <a href="https://twitter.com/davidpeters874/">
-                    <i className="fab fa-twitter"></i>
-                </a></p>
-                <p>Instagram: <a href="https://www.instagram.com/davidpeters1098/">
-                    <i className="fab fa-instagram"></i>
-                </a></p>
-                <p>Youtube: <a href="https://youtube.com/@wayfinder728?si=iacxUCLgIsO7r3Ge" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-youtube"></i>
-                </a></p>
-            </footer>
+
+
+{/* Video iframe list at the bottom */}
+    <div className="iframe-sec-container">
+        {videoSources.map((source, index) => (
+          <iframe
+            key={index}
+            src={source}
+            title={`Video ${index + 1}`}
+            allow="autoplay"
+            className={`video-frame ${index === currentVideoIndex ? 'active' : ''}`}
+            allowFullScreen
+          ></iframe>
+        ))}
+      </div>
+
+
+      {/* Video icon that toggles between minimized and maximized */}
+      <div className={`video-icon ${isMinimized ? 'minimized' : 'expanded'}`}>
+        {isMinimized ? (
+          <button className="toggle-button" onClick={() => setIsMinimized(false)}>Open Video</button>
+        ) : (
+          <div className="expanded-video-container">
+            <iframe
+              src={videoSources[currentVideoIndex]}
+              title="Playing Video"
+              allowFullScreen
+              className="expanded-video"
+            ></iframe>
+            <button className="toggle-button" onClick={() => setIsMinimized(true)}>Minimize</button>
+          </div>
+        )}
+      </div>
+
+
+      {/* Floating Contact Section */}
+      <div className="contact-section">
+        <p>Contact us!</p>
+        <p>Email: contact@example.com</p>
+        <p>Phone: +123456789</p>
+      </div>
 
 
 
 
-            <Analytics />
+
+
+
+
+
+
+
+
+
+
+
+
+<footer id="contact">
+            <h2>Contact Us</h2>
+            <p>Email: davidoluwaseun874@gmail.com <a href="mailto:davidoluwaseun874@gmail.com"><i className="fa-solid fa-envelope"></i></a></p>
+            <p>Whatsapp: <a href="https://wa.link/chjxqu"><i className="fab fa-whatsapp"></i></a></p>
+            <p>Facebook: <a href="https://www.facebook.com/profile.php?id=61551330303945&mibextid=ZbWKwL">
+            <i className="fab fa-facebook-f"></i>
+          </a></p>
+            <p>Twitter: <a href="https://twitter.com/davidpeters874/">
+            <i className="fab fa-twitter"></i>
+          </a></p>
+            <p>Instagram: <a href="https://www.instagram.com/davidpeters1098/">
+            <i className="fab fa-instagram"></i>
+          </a></p>
+          <p>
+    Youtube: <a href="https://youtube.com/@wayfinder728?si=iacxUCLgIsO7r3Ge" target="_blank" rel="noopener noreferrer">
+      <i className="fab fa-youtube"></i>
+    </a>
+  </p>
+        </footer>
+          <Analytics /> 
+
+
         </div>
     );
 }
 
 
+export default App
 
 
-export default App;
+                        
