@@ -4,11 +4,9 @@ import './App.css';
 import CancelPage from './components/CancelPage';
 import SuccessPage from './components/SuccessPage';
 import './assets/style.css';
-import ProductImgPray from './assets/Pray.jpg';
 import ProductImgLogo from './assets/Logo.png';
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 import { Analytics } from '@vercel/analytics/react';
-
 
 
 function App() {
@@ -17,7 +15,7 @@ function App() {
     const [total, setTotal] = useState(0);
     const [displayedProducts, setDisplayedProducts] = useState([]);
     const [fullscreenIframe, setFullscreenIframe] = useState(null);
-    const iframeRef = useRef(null); // To hold the reference to the iframe element
+    const iframeRef = useRef(null);
     const infoPanelRef = useRef(null);
     const headerRef = useRef(null);
     const [isMinimized, setIsMinimized] = useState(true);
@@ -59,10 +57,6 @@ function App() {
         ];
 
 
-
-
-
-
 const videoSources = [
     'https://www.youtube.com/embed/JxOuQxq5AOg?si=MBBCrqRAVjza4P7i',
     'https://www.youtube.com/embed/bwD99EqbTKQ?si=-f6L6QX3Xrgz_-Hv',
@@ -75,8 +69,6 @@ const videoSources = [
   ];
 
 
-
-    // Function to switch video every 30 minutes
     useEffect(() => {
         const videoInterval = setInterval(() => {
             setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videoSources.length);
@@ -85,19 +77,11 @@ const videoSources = [
     }, [videoSources.length]);
 
 
-
-
-
-
-
-
-    // Function to load products initially
     useEffect(() => {
         setDisplayedProducts(products);
     }, []);
 
 
-    // Function to filter products based on search query
     const handleSearch = (query) => {
         const filteredProducts = products.filter(product =>
             product.title.toLowerCase().includes(query.toLowerCase())
@@ -106,17 +90,14 @@ const videoSources = [
     };
 
 
-    // Fullscreen functionality for the iframe
     const handleRead = (iframeId) => {
         setFullscreenIframe(iframeId);
     };
 
 
     const exitFullscreen = () => {
-        setFullscreenIframe(null); // Exit fullscreen mode
+        setFullscreenIframe(null);
     };
-
-
 
 
     const option = () => {
@@ -124,7 +105,7 @@ const videoSources = [
         if (infoPanel) {
             infoPanel.style.display = 'block';
         }
-        headerRef.style.height = '600px'
+        headerRef.current.style.height = '600px';
     };
 
 
@@ -133,11 +114,8 @@ const videoSources = [
         if (infoPanel) {
             infoPanel.style.display = 'none';
         }
-        headerRef.style.height = '150px'
+        headerRef.current.style.height = '150px';
     };
-
-
-    
 
 
     const handleShare = () => {
@@ -153,17 +131,15 @@ const videoSources = [
 
 
     const handleContact = () => {
-        // Scroll to contact section or open a modal
         const contactSection = document.getElementById('contact');
         if (contactSection) {
             contactSection.scrollIntoView({ behavior: 'smooth' });
         } else {
-            window.location.href = "mailto:davidoluwaseun874@gmail.com"; // Update with the actual email
+            window.location.href = "mailto:davidoluwaseun874@gmail.com";
         }
     };
 
 
-    // Cart logic: Load, save, and handle updates
     const saveCartItems = (items) => {
         localStorage.setItem('cartItems', JSON.stringify(items));
     };
@@ -224,7 +200,6 @@ const videoSources = [
     };
 
 
-    // Toggles the cart visibility
     const toggleCart = () => {
         setIsActive(!isActive);
     };
@@ -238,18 +213,14 @@ const videoSources = [
     useEffect(() => {
         loadCartItems();
     }, []);
-    
+
+
     useEffect(() => {
-        // Update the cart icon's data-quantity attribute
         const cartIcon = document.getElementById('cart-icon');
         if (cartIcon) {
             cartIcon.setAttribute('data-quantity', getTotalQuantity());
         }
     }, [cartItems]);
-
-
-
-
 
 
     const config = {
@@ -259,31 +230,28 @@ const videoSources = [
         currency: 'NGN',
         payment_options: 'card,mobilemoney,ussd',
         customer: {
-          email: 'davidoluwaseun874@gmail.com',
-           phone_number: '08087846847',
-          name: 'David Peters',
+            email: 'davidoluwaseun874@gmail.com',
+            phone_number: '08087846847',
+            name: 'David Peters',
         },
         customizations: {
-          title: 'Books Purchase',
-          description: 'Payment for items bought in cart',
-          logo: {ProductImgLogo},
+            title: 'Books Purchase',
+            description: 'Payment for items bought in cart',
+            logo: ProductImgLogo,
         },
-      };
-    
-      const handleFlutterPayment = useFlutterwave(config);
+    };
 
 
+    const handleFlutterPayment = useFlutterwave(config);
 
 
-
-
-return (
+    return (
         <div className="App">
             <header ref={headerRef}>
                 <div className="nav container">
                     <nav>
                         <div className="container">
-                            <div className="menu-toggle" onClick={option} >&#9776;</div>
+                            <div className="menu-toggle" onClick={option}>&#9776;</div>
                             <ul id="largeul">
                                 <li className="projects">
                                     <a href="#" onClick={handleShare} id="icons-l"><i className="fa fa-share"></i></a>
@@ -293,7 +261,7 @@ return (
                                 </li>
                             </ul>
                         </div>
-                        <div id="info-panel" className="info-panel" ref={infoPanelRef} >
+                        <div id="info-panel" className="info-panel" ref={infoPanelRef}>
                             <div className="menu-exit" onClick={hideInfoPanel}>&times;</div>
                             <ul>
                                 <li className="shareButton"><a href="#" onClick={handleContact}><i className="fa fa-user-plus"></i> Invite friends</a></li>
@@ -305,23 +273,23 @@ return (
                             </ul>
                         </div>
                     </nav>
-                    <a href="#" className="logo">Wayfinderreads</a>
+                    <a href="#" className="logo">WayfinderReads</a>
                     <div className="search-bar">
                         <input
                             type="text"
                             placeholder="Search for books..."
                             className="search-input"
                             onChange={(e) => handleSearch(e.target.value)}
-                            style={{
-                                color: "#00000f"
-                            }}
+                            style={{ color: "#000" }}
                         />
                         <i className="bx bx-search search-icon"></i>
                     </div>
                     <i className="bx bx-shopping-bag" id="cart-icon" data-quantity="0" onClick={toggleCart}></i>
                 </div>
             </header>
-<div className={`cart ${isActive ? 'active' : ''}`}>
+            
+
+            <div className={`cart ${isActive ? 'active' : ''}`}>
                 <h2 className="cart-title">Your Cart</h2>
                 <div className="cart-content">
                     {cartItems.map((item, index) => (
