@@ -193,7 +193,7 @@ header {
     grid-template-columns: repeat(auto-fit,  minmax(220px, auto));
     gap: 1.5rem;
 }
-.product-box iframe {
+.product-box {
     position: relative;
     background: #2d2e37;
     padding: 10px;
@@ -428,6 +428,7 @@ i {
     height: 300px; 
     border-radius: 20px; 
 }
+
 .fullscreen {
     position: fixed;
     top: 0;
@@ -435,12 +436,9 @@ i {
     width: 100%;
     height: 100%;
     background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+    border: none;
+    z-index: 1000; /* Ensure this is below the exit button */
 }
-
 .fullscreen-overlay {
     position: absolute;
     top: 10px;
