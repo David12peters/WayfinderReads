@@ -5,6 +5,7 @@ import CancelPage from './components/CancelPage';
 import SuccessPage from './components/SuccessPage';
 import './assets/style.css';
 import ProductImgLogo from './assets/Logo.png';
+import ProductImgPray from './assets/Pray.jpg';
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 import { Analytics } from '@vercel/analytics/react';
 
