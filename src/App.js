@@ -1,10 +1,15 @@
+## Name: old
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import CancelPage from './components/CancelPage';
 import SuccessPage from './components/SuccessPage';
 import './assets/style.css';
-import ProductImg from './assets/Payment-failed.jpg';
+import ProductImgLogo from './assets/Logo.png';
+import ProductImgPray from './assets/Pray.jpg';
+import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
+import { Analytics } from '@vercel/analytics/react';
 
 
 
@@ -15,21 +20,16 @@ function App() {
     const [total, setTotal] = useState(0);
     const [displayedProducts, setDisplayedProducts] = useState([]);
     const [fullscreenIframe, setFullscreenIframe] = useState(null);
-    const iframeRef = useRef(null); // To hold the reference to the iframe element
+    const iframeRef = useRef(null);
+    const infoPanelRef = useRef(null);
+    const headerRef = useRef(null);
+    const [isMinimized, setIsMinimized] = useState(true);
+    const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
 
 
 
-   
-
-
-
-
-
-
-
-
-const products = [
+    const products = [
         { id: 1, title: 'Christ Jesus our royal highpriest', price: '$2', url: 'https://drive.google.com/file/d/1Sqe5wME6DAzXkv9Z21KQIP9QDlpEzIQz/preview?usp=embed_googleplus' },
         { id: 2, title: '21 Irrefutable Laws of LEADERSHIP', price: '$2', url: 'https://drive.google.com/file/d/1T-F_th0WpJuq0b_KeQwo7hu1B5vKkKv6/preview?usp=embed_googleplus' },
         { id: 3, title: 'Adult Children of Emotionally Immature Parents', price: '$2', url: 'https://drive.google.com/file/d/1T8ok_wVWG5v8UViey50OTcFbqAhX93b9/preview?usp=embed_googleplus' },
@@ -64,7 +64,32 @@ const products = [
         ];
 
 
- // Function to load products initially
+
+
+const videoSources = [
+    'https://www.youtube.com/embed/JxOuQxq5AOg?si=MBBCrqRAVjza4P7i',
+    'https://www.youtube.com/embed/bwD99EqbTKQ?si=-f6L6QX3Xrgz_-Hv',
+    'https://www.youtube.com/embed/rnHldmO4vdk?si=5wEyWNlcwt_4lzN1',
+    'https://www.youtube.com/embed/J6OTCWSurYQ?si=3D5zWsloCKFnwc-J',
+    'https://www.youtube.com/embed/ujqiec1bAds?si=oqw-5FZ-8p-hfIWb',
+    'https://www.youtube.com/embed/25LO-SCcD4c?si=LHy-zjQExf4QswaN',
+    'https://www.youtube.com/embed/25LO-SCcD4c?si=sPx7A2oMikPdLp_5',
+    'https://www.youtube.com/embed/l7C4_v4Lnxc?si=lqt2aVK__4wBUupj',
+  ];
+
+
+
+
+    useEffect(() => {
+        const videoInterval = setInterval(() => {
+            setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videoSources.length);
+        }, 1800000); // 30 minutes
+        return () => clearInterval(videoInterval);
+    }, [videoSources.length]);
+
+
+
+
     useEffect(() => {
         setDisplayedProducts(products);
     }, []);
@@ -72,22 +97,16 @@ const products = [
 
 
 
-    // Function to filter products based on search query
     const handleSearch = (query) => {
         const filteredProducts = products.filter(product =>
             product.title.toLowerCase().includes(query.toLowerCase())
         );
         setDisplayedProducts(filteredProducts);
-
-
     };
 
 
 
 
-
-
-    // Fullscreen functionality for the iframe
     const handleRead = (iframeId) => {
         setFullscreenIframe(iframeId);
     };
@@ -96,7 +115,29 @@ const products = [
 
 
     const exitFullscreen = () => {
-        setFullscreenIframe(null); // Exit fullscreen mode
+        setFullscreenIframe(null);
+    };
+
+
+
+
+    const option = () => {
+        const infoPanel = infoPanelRef.current;
+        if (infoPanel) {
+            infoPanel.style.display = 'block';
+        }
+        headerRef.current.style.height = '600px';
+    };
+
+
+
+
+    const hideInfoPanel = () => {
+        const infoPanel = infoPanelRef.current;
+        if (infoPanel) {
+            infoPanel.style.display = 'none';
+        }
+        headerRef.current.style.height = '150px';
     };
 
 
@@ -117,19 +158,17 @@ const products = [
 
 
     const handleContact = () => {
-        // Scroll to contact section or open a modal
         const contactSection = document.getElementById('contact');
         if (contactSection) {
             contactSection.scrollIntoView({ behavior: 'smooth' });
         } else {
-            window.location.href = "mailto:contact@wayfinderreads.com"; // Update with the actual email
+            window.location.href = "mailto:davidoluwaseun874@gmail.com";
         }
     };
 
 
 
 
-    // Cart logic: Load, save, and handle updates
     const saveCartItems = (items) => {
         localStorage.setItem('cartItems', JSON.stringify(items));
     };
@@ -204,9 +243,15 @@ const products = [
 
 
 
-    // Toggles the cart visibility
     const toggleCart = () => {
         setIsActive(!isActive);
+    };
+
+
+
+
+    const getTotalQuantity = () => {
+        return cartItems.reduce((acc, item) => acc + item.quantity, 0);
     };
 
 
@@ -219,49 +264,85 @@ const products = [
 
 
 
+    useEffect(() => {
+        const cartIcon = document.getElementById('cart-icon');
+        if (cartIcon) {
+            cartIcon.setAttribute('data-quantity', getTotalQuantity());
+        }
+    }, [cartItems]);
+
+
+
+
+    const config = {
+        public_key: process.env.REACT_APP_PUBLIC_KEY,
+        tx_ref: Date.now(),
+        amount: total.toFixed(2) * 1700,
+        currency: 'NGN',
+        payment_options: 'card,mobilemoney,ussd',
+        customer: {
+            email: 'davidoluwaseun874@gmail.com',
+            phone_number: '08087846847',
+            name: 'David Peters',
+        },
+        customizations: {
+            title: 'Books Purchase',
+            description: 'Payment for items bought in cart',
+            logo: ProductImgLogo,
+        },
+    };
+
+
+
+
+    const handleFlutterPayment = useFlutterwave(config);
+
+
+
+
     return (
         <div className="App">
-            <header>
+            <header ref={headerRef}>
                 <div className="nav container">
                     <nav>
                         <div className="container">
-                            <div className="menu-toggle">&#9776;</div>
+                            <div className="menu-toggle" onClick={option}>&#9776;</div>
                             <ul id="largeul">
                                 <li className="projects">
-                                    <a href="#" onClick={handleShare}><i className="fa fa-share"></i></a>
+                                    <a href="#" onClick={handleShare} id="icons-l"><i className="fa fa-share"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#" onClick={handleContact}><i className="fas fa-address-card"></i></a>
+                                    <a href="#" onClick={handleContact} id="icons-l"><i className="fas fa-address-card"></i></a>
                                 </li>
                             </ul>
                         </div>
-                        <div id="info-panel" className="info-panel">
-                            <div className="menu-exit">&times;</div>
+                        <div id="info-panel" className="info-panel" ref={infoPanelRef}>
+                            <div className="menu-exit" onClick={hideInfoPanel}>&times;</div>
                             <ul>
-                                <li className="shareButton"><a href="#"><i className="fa fa-user-plus"></i> Invite friends</a></li>
+                                <li className="shareButton"><a href="#" onClick={handleContact}><i className="fa fa-user-plus"></i> Invite friends</a></li>
                                 <hr />
-                                <li className="projects"><a href="#"><i className="fa fa-share"></i> Share</a></li>
+                                <li className="projects"><a href="#" onClick={handleShare}><i className="fa fa-share"></i> Share</a></li>
                                 <hr />
                                 <li className="contacts"><a href="#contact"><i className="fas fa-address-card"></i> Contact</a></li>
                                 <hr />
                             </ul>
                         </div>
                     </nav>
-                    <a href="#" className="logo">Wayfinderreads</a>
+                    <a href="#" className="logo">WayfinderReads</a>
                     <div className="search-bar">
                         <input
                             type="text"
                             placeholder="Search for books..."
                             className="search-input"
                             onChange={(e) => handleSearch(e.target.value)}
+                            style={{ color: "#000" }}
                         />
                         <i className="bx bx-search search-icon"></i>
                     </div>
                     <i className="bx bx-shopping-bag" id="cart-icon" data-quantity="0" onClick={toggleCart}></i>
                 </div>
             </header>
-
-
+            
 
 
             <div className={`cart ${isActive ? 'active' : ''}`}>
@@ -269,7 +350,22 @@ const products = [
                 <div className="cart-content">
                     {cartItems.map((item, index) => (
                         <div key={index} className="cart-box">
-                            <img src={item.productImg || ProductImg} alt="" className="cart-img" />
+                            <a id="cartImLink" ><iframe src={item.url} className="cart-img" title={item.title}></iframe>
+                            <img
+                                            src={ProductImgPray}
+                                            alt="Product Overlay"
+                                            className="product-overlay"
+                                            style={{
+                                                position: 'absolute',
+                                                top: '10px',
+                                                right: '10px',
+                                                width: '50px',
+                                                height: '50px',
+                                                borderRadius: '50%',
+                                                zIndex: 1
+                                            }}
+                                        />
+                            </a>
                             <div className="detail-box">
                                 <div className="cart-product-title">{item.title}</div>
                                 <div className="cart-price">{item.price}</div>
@@ -286,9 +382,32 @@ const products = [
                 </div>
                 <div className="total">
                     <div className="total-title">Total</div>
-                    <div className="total-price">${total.toFixed(2)}</div>
-                </div>
-                <button type="button" className="btn-buy">Pay Now</button>
+                    <div className="total-price">NGN{total.toFixed(2) * 1700}</div>
+                </div>  <button
+        onClick={() => {
+          handleFlutterPayment({
+            callback: (response) => {
+              console.log(response);
+              closePaymentModal(); // close modal programmatically
+            },
+            onClose: () => {},
+          });
+        }}
+        onMouseOver={(e) => (e.target.style.backgroundColor = '#00796b')}
+        onMouseOut={(e) => (e.target.style.backgroundColor = '#009688')}
+        type="button" 
+        className='btn-buy'
+      >
+       Pay Now
+      </button>
+
+
+
+
+
+
+
+
                 <i className="bx bx-x" id="close-cart" onClick={toggleCart}></i>
             </div>
 
@@ -299,21 +418,21 @@ const products = [
                 <Routes>
                     <Route path="/" element={
                         <section className="shop container">
-                            <h2 className="section-title"><i>Gearing Up</i></h2>
-                            <div className="products-container">
-                                {displayedProducts.map((product, index) => (
-                                    <div key={product.id} className="product-box">
-                                        <div className="iframe-container">
-                                            <iframe
-                                                id={`iframe-${index}`}
-                                                src={product.url}
-                                                title={product.title}
-                                                className={`product-frame ${fullscreenIframe === `iframe-${index}` ? 'fullscreen' : ''}`}
-                                                style={{ width: '100%', height: fullscreenIframe === `iframe-${index}` ? '100vh' : '300px', border: 'none' }}
-                                                ref={iframeRef}
-                                            />
-                                            <img
-                                                src={ProductImg}
+                        <h2 className="section-title"><i>Gearing Up</i></h2>
+                        <div className="products-container">
+                            {displayedProducts.map((product, index) => (
+                                <div key={product.id} className="product-box">
+                                    <div className="iframe-container">
+                                        <iframe
+                                            id={`iframe-${index}`}
+                                            src={product.url}
+                                            title={product.title}
+                                            className={`product-frame ${fullscreenIframe === `iframe-${index}` ? 'fullscreen' : ''}`}
+                                            style={{ width: '100%', height: fullscreenIframe === `iframe-${index}` ? '100vh' : '300px', border: 'none' }}
+                                            ref={iframeRef}
+                                        />
+                                        <a href="https://david12peters.github.io/OGM_LOGO/index.html"> <img
+                                                src={ProductImgPray}
                                                 alt="Product Overlay"
                                                 className="product-overlay"
                                                 style={{
@@ -325,21 +444,22 @@ const products = [
                                                     borderRadius: '50%',
                                                     zIndex: 1
                                                 }}
-                                            />
-                                        </div>
-                                        <h2 className="product-title">{product.title}</h2>
-                                        <span className="price">{product.price}</span>
-                                        <button className="btn-read" onClick={() => handleRead(`iframe-${index}`)}>
-                                            Read <i className="fa-solid fa-book"></i>
-                                        </button>
-                                        <i className="bx bx-shopping-bag add-cart" onClick={() => addProductToCart(product)}></i>
+                                            /></a>
                                     </div>
-                                ))}
-                            </div>
-                        </section>
+                                    <h2 className="product-title">{product.title}</h2>
+                                    <span className="price">{product.price}</span>
+                                    <button className="btn-read" onClick={() => handleRead(`iframe-${index}`)}>
+                                        Read <i className="fa-solid fa-book"></i>
+                                    </button>
+                                    <i className="bx bx-shopping-bag add-cart" onClick={() => addProductToCart(product)}></i>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                    
                     } />
-                    <Route path="/cancel" element={<CancelPage />} />
-                    <Route path="/success" element={<SuccessPage />} />
+                    <Route path="/cancel" element={<CancelPage />} /> {/* CancelPage Route */}
+                    <Route path="/success" element={<SuccessPage />} /> {/* SuccessPage Route */}
                 </Routes>
             </Router>
 
@@ -349,6 +469,104 @@ const products = [
             {fullscreenIframe && (
                 <div className="fullscreen-exit" onClick={exitFullscreen}>Exit</div>
             )}
+
+
+
+
+
+
+
+
+
+
+
+
+                        {/*<audio src={Music} style={{
+    visibility: 'hidden'
+}} autoPlay loop></audio>*/}
+
+
+
+
+
+
+
+
+
+
+
+
+{/* Video iframe list at the bottom */}
+    <div className="iframe-sec-container">
+        {videoSources.map((source, index) => (
+          <iframe
+            key={index}
+            src={source}
+            title={`Video ${index + 1}`}
+            allow="autoplay"
+            className={`video-frame ${index === currentVideoIndex ? 'active' : ''}`}
+            allowFullScreen
+          ></iframe>
+        ))}
+      </div>
+
+
+
+
+      {/* Video icon that toggles between minimized and maximized */}
+      <div className={`video-icon ${isMinimized ? 'minimized' : 'expanded'}`}>
+        {isMinimized ? (
+          <button className="toggle-button" onClick={() => setIsMinimized(false)}>Open Video</button>
+        ) : (
+          <div className="expanded-video-container">
+            <iframe
+              src={videoSources[currentVideoIndex]}
+              title="Playing Video"
+              allowFullScreen
+              className="expanded-video"
+            ></iframe>
+            <button className="toggle-button" onClick={() => setIsMinimized(true)}>Minimize</button>
+          </div>
+        )}
+      </div>
+
+
+
+
+      {/* Floating Contact Section */}
+      <div className="contact-section">
+        <p>Contact us!</p>
+        <p>Email: contact@example.com</p>
+        <p>Phone: +123456789</p>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -372,7 +590,7 @@ const products = [
     </a>
   </p>
         </footer>
-           
+          <Analytics /> 
 
 
 
