@@ -1,5 +1,3 @@
-## Name: old
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
