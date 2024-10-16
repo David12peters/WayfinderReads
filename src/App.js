@@ -372,7 +372,7 @@ const products = [
     </a>
   </p>
         </footer>
-          <Analytics /> 
+           
 
 
 
