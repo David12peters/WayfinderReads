@@ -65,6 +65,7 @@ function App() {
 
 
 const videoSources = [
+    'https://www.youtube.com/embed/njsq639pCmA?si=rf5raiUC-rMrhUk2',
     'https://www.youtube.com/embed/JxOuQxq5AOg?si=MBBCrqRAVjza4P7i',
     'https://www.youtube.com/embed/bwD99EqbTKQ?si=-f6L6QX3Xrgz_-Hv',
     'https://www.youtube.com/embed/rnHldmO4vdk?si=5wEyWNlcwt_4lzN1',
