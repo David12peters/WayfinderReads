@@ -535,9 +535,9 @@ const videoSources = [
       {/* Floating Contact Section */}
       <div className="contact-section">
         <p>Contact us!</p>
-        <p>Email: contact@example.com</p>
-        <p>Phone: +123456789</p>
-      </div>
+        <p>Whatsapp: <a href="https://wa.link/chjxqu"><i className="fab fa-whatsapp"></i></a></p>
+        <p>Facebook: <a href="https://www.facebook.com/profile.php?id=61551330303945&mibextid=ZbWKwL">
+          </div>
 
 
 
