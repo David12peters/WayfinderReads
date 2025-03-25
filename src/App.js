@@ -28,10 +28,10 @@ function App() {
 
 
     const products = [
-        { id: 1, title: 'Christ Jesus our royal highpriest', price: '$2', url: 'https://drive.google.com/file/d/1Sqe5wME6DAzXkv9Z21KQIP9QDlpEzIQz/preview?usp=embed_googleplus' },
-        { id: 2, title: '21 Irrefutable Laws of LEADERSHIP', price: '$2', url: 'https://drive.google.com/file/d/1T-F_th0WpJuq0b_KeQwo7hu1B5vKkKv6/preview?usp=embed_googleplus' },
-        { id: 3, title: 'Adult Children of Emotionally Immature Parents', price: '$2', url: 'https://drive.google.com/file/d/1T8ok_wVWG5v8UViey50OTcFbqAhX93b9/preview?usp=embed_googleplus' },
-        { id: 4, title: 'TODAY MATTERS_ 12 Daily Practices To Guarantee Tomorrow\'s Success', price: '$2', url: 'https://drive.google.com/file/d/1TAc3-e6QYYHFelcOE4cnsIBKYv9FwN0t/preview?usp=embed_googleplus' },
+        { id: 1, title: 'Christ Jesus our royal highpriest', price: '$2', url: 'https://drive.google.com/file/d/1Sqe5wME6DAzXkv9Z21KQIP9QDlpEzIQz/preview?disableprint=1' },
+        { id: 2, title: '21 Irrefutable Laws of LEADERSHIP', price: '$2', url: 'https://drive.google.com/file/d/1T-F_th0WpJuq0b_KeQwo7hu1B5vKkKv6/preview??disableprint=1usp=embed_googleplus' },
+        { id: 3, title: 'Adult Children of Emotionally Immature Parents', price: '$2', url: 'https://drive.google.com/file/d/1T8ok_wVWG5v8UViey50OTcFbqAhX93b9/preview??disableprint=1usp=embed_googleplus' },
+        { id: 4, title: 'TODAY MATTERS_ 12 Daily Practices To Guarantee Tomorrow\'s Success', price: '$2', url: 'https://drive.google.com/file/d/1TAc3-e6QYYHFelcOE4cnsIBKYv9FwN0t/preview??disableprint=1usp=embed_googleplus' },
         { id: 5, title: 'Battlefield of the Mind - Joyce Meyer', price: '$2', url: 'https://drive.google.com/file/d/1TDdPhMjOsJihAWWL2Kt207dtBytK5qRQ/preview?usp=embed_googleplus' },
         { id: 6, title: 'Becoming a Praise Warrior', price: '$2', url: 'https://drive.google.com/file/d/1TDoB0CSM7M94oy-GgKAV6ZCberUY6Asu/preview?usp=embed_googleplus' },
         { id: 7, title: 'BEYOND THE NAKED', price: '$2', url: 'https://drive.google.com/file/d/1TJId7JccxmjjdzSytkkX_LXlBo25bOVa/preview?usp=embed_googleplus' },
