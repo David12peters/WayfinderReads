@@ -349,7 +349,7 @@ const videoSources = [
                 <div className="cart-content">
                     {cartItems.map((item, index) => (
                         <div key={index} className="cart-box">
-                            <a id="cartImLink" ><iframe src={item.url} className="cart-img" title={item.title}></iframe>
+                            <a id="cartImLink" ><img src={item.url} className="cart-img" title={item.title} />
                             <img
                                             src={ProductImgPray}
                                             alt="Product Overlay"
