@@ -92,7 +92,7 @@ const videoSources = [
     useEffect(() => {
         setDisplayedProducts(products);
     }, []);
-    {/*
+   
 useEffect(() => {
     document.title = "My SEO Optimized Page";
     
@@ -104,52 +104,54 @@ useEffect(() => {
          const metaDescription = document.querySelector('meta[name="keywords"]');
     if (metaDescription) {
       metaDescription.setAttribute("content", "Gospel books, Christian books, Christian literature, Bible study resources, Devotional books, Inspirational books, Faith-based books, Spiritual growth books, Christian fiction, Non-fiction Christian books, Christian living books, Theology books, Biblical studies, Christian self-help, Gospel-centered books, Christian counseling books, Christian parenting books, Christian relationships books, Christian leadership books, Christian ministry books, Best gospel books for spiritual growth, Christian books for men's ministry, Christian books for women's ministry, Christian books for youth ministry, Bible study resources for small groups, Devotional books for daily inspiration, Christian fiction novels, Non-fiction Christian books on relationships, Christian living books on prayer, Theology books on salvation, Gospel books for evangelism, Christian books on forgiveness, Christian books on grace, Christian books on love, Christian books on faith, Buy gospel books online, Christian book recommendations, Gospel-centered literature, Bible study resources for churches, Devotional books for daily reading, Christian fiction authors, Non-fiction Christian books on leadership");
-        {/*
-        <meta name="author" content="Peters David Oluwaseun">
-
-    <!-- Add your website's main topic or category -->
-    <meta name="topic" content="Deep Christian Books">
-
-    <!-- Open Graph Meta Tags for social media sharing -->
-    <meta property="og:title" content="Deep Christian Books">
-    <meta property="og:description" content="Do you love Christian books?, well look no further, click to explore wayfinderreads where you can read inspiring, mind captivating Christian gospel books. ">
-    <meta property="og:url" content="https://wayfinder-reads.vercel.app/">
-    <meta property="og:image" content="https://wayfinder-reads.vercel.app/images/wayfinder.png">
-
-    <!-- Twitter Card Meta Tags for Twitter sharing -->
-    <meta name="twitter:card" content="summary_image">
-    <meta name="twitter:site" content="@Davidpeters874">
-    <meta name="twitter:title" content="Deep Christian books">
-    <meta name="twitter:description" content="Do you love Christian books?, well look no further, click to explore wayfinderreads where you can read inspiring, mind captivating Christian gospel books. ">
-    <meta name="twitter:image" content="images/wayfinder.png">
-
-    <meta name="google-adsense-account" content="ca-pub-3075995862771244">
-    
-        */}*/}
-    {/*
+       
+   
         const metaDescription = document.querySelector('meta[name="author"]');
     if (metaDescription) {
       metaDescription.setAttribute("content", "Peters David Oluwaseun");
 
+      const metaDescription = document.querySelector('meta[name="topic"]');
+    if (metaDescription) {
+      metaDescription.setAttribute("content", "Deep Christian Books");
+
          const metaDescription = document.querySelector('meta[property="og:title"');
     if (metaDescription) {
-      metaDescription.setAttribute("content", "Do ");
+      metaDescription.setAttribute("content", "Deep Christian Books");
 
-         const metaDescription = document.querySelector('meta[name="description"]');
+         const metaDescription = document.querySelector('meta[property="og:description"]');
     if (metaDescription) {
-      metaDescription.setAttribute("content", "Do ");
+      metaDescription.setAttribute("content", "Do you love Christian books?, well look no further, click to explore wayfinderreads where you can read inspiring, mind captivating Christian gospel books. ");
 
-         const metaDescription = document.querySelector('meta[name="description"]');
+         const metaDescription = document.querySelector('meta[property="og:url"]');
     if (metaDescription) {
-      metaDescription.setAttribute("content", "Do ");
+      metaDescription.setAttribute("content", "https://wayfinder-reads.vercel.app/");
 
-         const metaDescription = document.querySelector('meta[name="description"]');
+         const metaDescription = document.querySelector('meta[property="og:image"]');
     if (metaDescription) {
-      metaDescription.setAttribute("content", "Do ");
+      metaDescription.setAttribute("content", "https://wayfinder-reads.vercel.app/images/wayfinder.png");
+
+ const metaDescription = document.querySelector('meta[name="twitter:card"]');
+    if (metaDescription) {
+      metaDescription.setAttribute("content", "summary_image");
+
+       const metaDescription = document.querySelector('meta[name="twitter:site"]');
+    if (metaDescription) {
+      metaDescription.setAttribute("content", "@Davidpeters874");
+
+       const metaDescription = document.querySelector('meta[name="twitter:title"]');
+    if (metaDescription) {
+      metaDescription.setAttribute("content", "Deep Christian books");
+
+       const metaDescription = document.querySelector('meta[twitter:description]');
+    if (metaDescription) {
+      metaDescription.setAttribute("content", "Do you love Christian books?, well look no further, click to explore wayfinderreads where you can read inspiring, mind captivating Christian gospel books. ");
+
+      const metaDescription = document.querySelector('meta[name="twitter:image"]');
+    if (metaDescription) {
+      metaDescription.setAttribute("content", "https://wayfinder-reads.vercel.app/images/wayfinder.png");
 
     }
   }, []);
-*/}*/}
 
     const handleSearch = (query) => {
         const filteredProducts = products.filter(product =>
