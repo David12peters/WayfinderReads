@@ -409,7 +409,7 @@ const videoSources = [
                             {displayedProducts.map((product, index) => (
                                 <div key={product.id} className="product-box">
                                     <div className="iframe-container">
-                                        <img
+                                        <iframe
                                             id={`iframe-${index}`}
                                             src={product.url}
                                             title={product.title}
