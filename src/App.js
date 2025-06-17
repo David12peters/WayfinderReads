@@ -311,6 +311,16 @@ useEffect(() => {
     };
 
 
+const fetchDollarRate = async () => {
+    try {
+        const response = await fetch('https://api.exchangerate.host/latest?base=USD&symbols=NGN');
+        const data = await response.json();
+        return data.rates.NGN;
+    } catch (error) {
+        console.error("Failed to fetch exchange rate:", error);
+        return 1700; // fallback in case of error
+    }
+};
 
 
     useEffect(() => {
@@ -330,10 +340,14 @@ useEffect(() => {
 
 
 
+    const initiatePayment = async () => {
+    const rate = await fetchDollarRate();
+    const amountInNaira = (total * rate).toFixed(2);
+
     const config = {
         public_key: process.env.REACT_APP_PUBLIC_KEY,
         tx_ref: Date.now(),
-        amount: total.toFixed(2) * 1700,
+        amount: amountInNaira,
         currency: 'NGN',
         payment_options: 'card,mobilemoney,ussd',
         customer: {
@@ -348,10 +362,17 @@ useEffect(() => {
         },
     };
 
-
-
-
     const handleFlutterPayment = useFlutterwave(config);
+
+    handleFlutterPayment({
+        callback: (response) => {
+            console.log(response);
+            closePaymentModal();
+        },
+        onClose: () => {},
+    });
+};
+
 
 
 
