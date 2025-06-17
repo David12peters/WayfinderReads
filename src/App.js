@@ -448,15 +448,7 @@ const fetchDollarRate = async () => {
                     <div className="total-title">Total</div>
                     <div className="total-price">NGN{total.toFixed(2) * 1700}</div>
                 </div>  <button
-        onClick={() => {
-          handleFlutterPayment({
-            callback: (response) => {
-              console.log(response);
-              closePaymentModal(); // close modal programmatically
-            },
-            onClose: () => {},
-          });
-        }}
+        onClick={initiatePayment}
         onMouseOver={(e) => (e.target.style.backgroundColor = '#00796b')}
         onMouseOut={(e) => (e.target.style.backgroundColor = '#009688')}
         type="button" 
