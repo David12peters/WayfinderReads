@@ -130,7 +130,7 @@ useEffect(() => {
     if (metaDescription) {
       metaDescription.setAttribute("content", "https://wayfinder-reads.vercel.app/images/wayfinder.png");
   }
- const metaDescription = document.querySelector('meta[name="twitter:card"]');
+     metaDescription = document.querySelector('meta[name="twitter:card"]');
     if (metaDescription) {
       metaDescription.setAttribute("content", "summary_image");
   }
