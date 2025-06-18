@@ -273,8 +273,8 @@ const fetchDollarRate = async () => {
             cartIcon.setAttribute('data-quantity', getTotalQuantity());
         }
     }, [cartItems]);
-{/* This is a comment in JSX
 
+      
 const flutterConfig = {
   public_key: process.env.REACT_APP_PUBLIC_KEY,
   tx_ref: Date.now().toString(),
@@ -308,7 +308,7 @@ const flutterConfig = {
     onClose: () => {},
   });
 };
-*/}
+      
   return (
       <div className="App">
             <header ref={headerRef}>
@@ -379,7 +379,7 @@ const flutterConfig = {
                 <div className="total">
                     <div className="total-title">Total</div>
                     <div className="total-price">NGN{total.toFixed(2) * 1700}</div>
-                </div> {/* <button
+                </div>   <button
   onClick={initiatePayment}
   onMouseOver={(e) => (e.target.style.backgroundColor = '#00796b')}
   onMouseOut={(e) => (e.target.style.backgroundColor = '#009688')}
@@ -387,7 +387,7 @@ const flutterConfig = {
   className="btn-buy"
 >
   Pay Now
-</button>*/}
+</button>
 
 
 
