@@ -24,6 +24,8 @@ function App() {
     const [isMinimized, setIsMinimized] = useState(true);
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const rateRef = useRef(null);
+const [flutterConfig, setFlutterConfig] = useState(null);
+const handleFlutterPayment = flutterConfig ? useFlutterwave(flutterConfig) : null;
 
 
 
@@ -339,43 +341,31 @@ const fetchDollarRate = async () => {
     }, [cartItems]);
 
 
-  const config = {
-    public_key: process.env.REACT_APP_PUBLIC_KEY,
-    tx_ref: Date.now(),
-    amount: 0, // Will be updated at runtime
-    currency: 'NGN',
-    payment_options: 'card,mobilemoney,ussd',
-    customer: {
-      email: 'davidoluwaseun874@gmail.com',
-      phone_number: '08087846847',
-      name: 'David Peters',
-    },
-    customizations: {
-      title: 'Books Purchase',
-      description: 'Payment for items bought in cart',
-      logo: ProductImgLogo,
-    },
-  };
-
-  const handleFlutterPayment = useFlutterwave(config); // ✅ VALID here at the top
-
-  const initiatePayment = async () => {
+ useEffect(() => {
+  const setupFlutterConfig = async () => {
     const rate = await fetchDollarRate();
     const amountInNaira = (total * rate).toFixed(2);
-    
-    handleFlutterPayment({
+    setFlutterConfig({
+      public_key: process.env.REACT_APP_PUBLIC_KEY,
+      tx_ref: Date.now().toString(),
       amount: amountInNaira,
-      callback: (response) => {
-        console.log(response);
-        closePaymentModal();
+      currency: 'NGN',
+      payment_options: 'card,mobilemoney,ussd',
+      customer: {
+        email: 'davidoluwaseun874@gmail.com',
+        phone_number: '08087846847',
+        name: 'David Peters',
       },
-      onClose: () => {},
+      customizations: {
+        title: 'Books Purchase',
+        description: 'Payment for items bought in cart',
+        logo: ProductImgLogo,
+      },
     });
   };
 
-   
-
-
+  setupFlutterConfig();
+}, [total]);
 
     return (
         <div className="App">
@@ -448,7 +438,19 @@ const fetchDollarRate = async () => {
                     <div className="total-title">Total</div>
                     <div className="total-price">NGN{total.toFixed(2) * 1700}</div>
                 </div>  <button
-        onClick={initiatePayment}
+        onClick={() => {
+    if (handleFlutterPayment) {
+      handleFlutterPayment({
+        callback: (response) => {
+          console.log(response);
+          closePaymentModal();
+        },
+        onClose: () => {},
+      });
+    } else {
+      alert("Payment system not ready yet");
+    }
+  }}
         onMouseOver={(e) => (e.target.style.backgroundColor = '#00796b')}
         onMouseOut={(e) => (e.target.style.backgroundColor = '#009688')}
         type="button" 
