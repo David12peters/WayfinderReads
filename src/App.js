@@ -275,7 +275,7 @@ const fetchDollarRate = async () => {
         }
     }, [cartItems]);
 
-       const rate = await fetchDollarRate();
+       const rate = fetchDollarRate();
        const amountInNaira = (total * rate).toFixed(2);
 const flutterConfig = {
   public_key: process.env.REACT_APP_PUBLIC_KEY,
