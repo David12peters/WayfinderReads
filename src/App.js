@@ -338,42 +338,44 @@ const fetchDollarRate = async () => {
     }, [cartItems]);
 
 
+const rateRef = useRef(null);
 
+  const [total, setTotal] = useState(0); // example total
+  const config = {
+    public_key: process.env.REACT_APP_PUBLIC_KEY,
+    tx_ref: Date.now(),
+    amount: 0, // Will be updated at runtime
+    currency: 'NGN',
+    payment_options: 'card,mobilemoney,ussd',
+    customer: {
+      email: 'davidoluwaseun874@gmail.com',
+      phone_number: '08087846847',
+      name: 'David Peters',
+    },
+    customizations: {
+      title: 'Books Purchase',
+      description: 'Payment for items bought in cart',
+      logo: ProductImgLogo,
+    },
+  };
 
-    const initiatePayment = async () => {
+  const handleFlutterPayment = useFlutterwave(config); // ✅ VALID here at the top
+
+  const initiatePayment = async () => {
     const rate = await fetchDollarRate();
     const amountInNaira = (total * rate).toFixed(2);
-
-    const config = {
-        public_key: process.env.REACT_APP_PUBLIC_KEY,
-        tx_ref: Date.now(),
-        amount: amountInNaira,
-        currency: 'NGN',
-        payment_options: 'card,mobilemoney,ussd',
-        customer: {
-            email: 'davidoluwaseun874@gmail.com',
-            phone_number: '08087846847',
-            name: 'David Peters',
-        },
-        customizations: {
-            title: 'Books Purchase',
-            description: 'Payment for items bought in cart',
-            logo: ProductImgLogo,
-        },
-    };
-
-    const handleFlutterPayment = useFlutterwave(config);
-
+    
     handleFlutterPayment({
-        callback: (response) => {
-            console.log(response);
-            closePaymentModal();
-        },
-        onClose: () => {},
+      amount: amountInNaira,
+      callback: (response) => {
+        console.log(response);
+        closePaymentModal();
+      },
+      onClose: () => {},
     });
-};
+  };
 
-
+   
 
 
 
