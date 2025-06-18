@@ -24,7 +24,6 @@ function App() {
     const [isMinimized, setIsMinimized] = useState(true);
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const rateRef = useRef(null);
-const [flutterConfig, setFlutterConfig] = useState(null);
 
 
     const products = [
