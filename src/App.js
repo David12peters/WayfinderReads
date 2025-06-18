@@ -250,14 +250,15 @@ const videoSources = [
 
 const fetchDollarRate = async () => {
     try {
-        const response = await fetch('https://api.exchangerate.host/latest?base=USD&symbols=NGN');
+        const response = await fetch(`https://api.apilayer.com/exchangerates_data/latest?base=USD&symbols=NGN&apikey=${process.env.REACT_APP_EXCHANGE_API_KEY}`);
         const data = await response.json();
         return data.rates.NGN;
     } catch (error) {
         console.error("Failed to fetch exchange rate:", error);
-        return 1700; // fallback in case of error
+        return 1700;
     }
 };
+
 
 
     useEffect(() => {
