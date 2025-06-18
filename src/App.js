@@ -275,11 +275,11 @@ const fetchDollarRate = async () => {
         }
     }, [cartItems]);
 
-      
+       const amountInNaira = (total * rate).toFixed(2);
 const flutterConfig = {
   public_key: process.env.REACT_APP_PUBLIC_KEY,
   tx_ref: Date.now().toString(),
-  amount: 0, // placeholder, will override later
+   amount: amountInNaira, // placeholder, will override later
   currency: 'NGN',
   payment_options: 'card,mobilemoney,ussd',
   customer: {
@@ -298,10 +298,9 @@ const flutterConfig = {
 
     const initiatePayment = async () => {
   const rate = await fetchDollarRate();
-  const amountInNaira = (total * rate).toFixed(2);
+
 
   handleFlutterPayment({
-    amount: amountInNaira,
     callback: (response) => {
       console.log(response);
       closePaymentModal();
