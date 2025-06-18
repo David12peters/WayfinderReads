@@ -23,6 +23,7 @@ function App() {
     const headerRef = useRef(null);
     const [isMinimized, setIsMinimized] = useState(true);
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+    const rateRef = useRef(null);
 
 
 
@@ -338,9 +339,6 @@ const fetchDollarRate = async () => {
     }, [cartItems]);
 
 
-const rateRef = useRef(null);
-
-  const [total, setTotal] = useState(0); // example total
   const config = {
     public_key: process.env.REACT_APP_PUBLIC_KEY,
     tx_ref: Date.now(),
