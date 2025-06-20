@@ -254,7 +254,7 @@ const fetchDollarRate = async () => {
         return data.rates.NGN;
     } catch (error) {
         console.error("Failed to fetch exchange rate:", error);
-        return 1700;
+        return 1549.37;
     }
 };
 
@@ -275,14 +275,14 @@ const fetchDollarRate = async () => {
     }, [cartItems]);
 
 
-  let initPrice = (total * 1700).toFixed(2);
+  let initPrice = (total * 1549.37).toFixed(2);
 
 (async () => {
   const total = 10;
   initPrice = await fetch(`https://api.exchangerate.host/latest?base=USD&symbols=NGN`)
     .then(res => res.json())
     .then(data => (total * data.rates.NGN).toFixed(2))
-    .catch(() => (total * 1700).toFixed(2));
+    .catch(() => (total * 1549.37).toFixed(2));
 })();
 
       
