@@ -249,7 +249,7 @@ const videoSources = [
 
 const fetchDollarRate = async () => {
     try {
-        const response = await fetch(`https://open.er-api.com/v6/latest/USD`);
+        const response = await fetch(`https://api.exchangerate.host/latest?base=USD&symbols=NGN`);
         const data = await response.json();
         return data.rates.NGN;
     } catch (error) {
@@ -279,7 +279,7 @@ const fetchDollarRate = async () => {
 
 (async () => {
   const total = 10;
-  initPrice = await fetch(`https://open.er-api.com/v6/latest/USD`)
+  initPrice = await fetch(`https://api.exchangerate.host/latest?base=USD&symbols=NGN`)
     .then(res => res.json())
     .then(data => (total * data.rates.NGN).toFixed(2))
     .catch(() => (total * 1700).toFixed(2));
