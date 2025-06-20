@@ -276,11 +276,16 @@ const fetchDollarRate = async () => {
     }, [cartItems]);
 
 
+
+      function quantities() {
+            const rate = await fetchDollarRate();
+            const amountInNaira = (total * rate).toFixed(2);
+}
       
       // ✅ Call Hook at top level
-const handleFlutterPayment = useFlutterwave({
-  const rate = await fetchDollarRate();
-  const amountInNaira = (total * rate).toFixed(2);
+const handleFlutterPayment = useFlutterwave(
+      quantities()
+      {
   public_key: process.env.REACT_APP_PUBLIC_KEY,
   tx_ref: Date.now().toString(), // Note: You can override this in `initiatePayment` if needed
   amount: amountInNaira, // temporary, will be overridden
