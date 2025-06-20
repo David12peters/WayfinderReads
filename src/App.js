@@ -275,39 +275,46 @@ const fetchDollarRate = async () => {
         }
     }, [cartItems]);
 
-       const rate = fetchDollarRate();
-       const amountInNaira = (total * rate).toFixed(2);
-const flutterConfig = {
-  public_key: process.env.REACT_APP_PUBLIC_KEY,
-  tx_ref: Date.now().toString(),
-   amount: amountInNaira, // placeholder, will override later
-  currency: 'NGN',
-  payment_options: 'card,mobilemoney,ussd',
-  customer: {
-    email: 'davidoluwaseun874@gmail.com',
-    phone_number: '08087846847',
-    name: 'David Peters',
-  },
-  customizations: {
-    title: 'Books Purchase',
-    description: 'Payment for items bought in cart',
-    logo: ProductImgLogo,
-  },
+
+      
+       const initiatePayment = async () => {
+  try {
+    const rate = await fetchDollarRate();
+    const amountInNaira = (total * rate).toFixed(2);
+
+    const flutterConfig = {
+      public_key: process.env.REACT_APP_PUBLIC_KEY,
+      tx_ref: Date.now().toString(),
+      amount: amountInNaira,
+      currency: 'NGN',
+      payment_options: 'card,mobilemoney,ussd',
+      customer: {
+        email: 'davidoluwaseun874@gmail.com',
+        phone_number: '08087846847',
+        name: 'David Peters',
+      },
+      customizations: {
+        title: 'Books Purchase',
+        description: 'Payment for items bought in cart',
+        logo: ProductImgLogo,
+      },
+    };
+
+    const handleFlutterPayment = useFlutterwave(flutterConfig);
+
+    handleFlutterPayment({
+      callback: (response) => {
+        console.log(response);
+        closePaymentModal(); // assumes this is defined in your context
+      },
+      onClose: () => {},
+    });
+
+  } catch (error) {
+    console.error("Payment initiation failed:", error);
+  }
 };
 
-    const handleFlutterPayment = useFlutterwave(flutterConfig); // ✅ No condition here
-
-    const initiatePayment = async () => {
-
-
-  handleFlutterPayment({
-    callback: (response) => {
-      console.log(response);
-      closePaymentModal();
-    },
-    onClose: () => {},
-  });
-};
       
   return (
       <div className="App">
