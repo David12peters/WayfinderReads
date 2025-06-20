@@ -276,8 +276,7 @@ const fetchDollarRate = async () => {
     }, [cartItems]);
 
 
-
-  let initPrice;
+  let initPrice = (total * 1700).toFixed(2);
 
 (async () => {
   const total = 10;
