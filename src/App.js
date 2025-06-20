@@ -21,7 +21,6 @@ function App() {
     const [isMinimized, setIsMinimized] = useState(true);
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const rateRef = useRef(null);
-    const REACT_APP_EXCHANGE_API_KEY = 'sgpBs6JetkNeyxeGLU80rJIPZsEk0Y0y';
 
     const products = [
         { id: 1, title: 'Christ Jesus our royal highpriest', price: '$2', url: 'https://drive.google.com/file/d/1Sqe5wME6DAzXkv9Z21KQIP9QDlpEzIQz/preview??usp=embed_googleplus' },
@@ -250,7 +249,7 @@ const videoSources = [
 
 const fetchDollarRate = async () => {
     try {
-        const response = await fetch(`https://api.apilayer.com/exchangerates_data/latest?base=USD&symbols=NGN&apikey=${process.env.REACT_APP_EXCHANGE_API_KEY}`);
+        const response = await fetch(`https://open.er-api.com/v6/latest/USD`);
         const data = await response.json();
         return data.rates.NGN;
     } catch (error) {
@@ -280,7 +279,7 @@ const fetchDollarRate = async () => {
 
 (async () => {
   const total = 10;
-  initPrice = await fetch(`https://api.apilayer.com/exchangerates_data/latest?base=USD&symbols=NGN&apikey=${process.env.REACT_APP_EXCHANGE_API_KEY}`)
+  initPrice = await fetch(`https://open.er-api.com/v6/latest/USD`)
     .then(res => res.json())
     .then(data => (total * data.rates.NGN).toFixed(2))
     .catch(() => (total * 1700).toFixed(2));
