@@ -21,7 +21,7 @@ function App() {
     const [isMinimized, setIsMinimized] = useState(true);
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const rateRef = useRef(null);
-
+    const REACT_APP_EXCHANGE_API_KEY = 'sgpBs6JetkNeyxeGLU80rJIPZsEk0Y0y';
 
     const products = [
         { id: 1, title: 'Christ Jesus our royal highpriest', price: '$2', url: 'https://drive.google.com/file/d/1Sqe5wME6DAzXkv9Z21KQIP9QDlpEzIQz/preview??usp=embed_googleplus' },
