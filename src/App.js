@@ -283,7 +283,7 @@ const handleFlutterPayment = useFlutterwave({
   const amountInNaira = (total * rate).toFixed(2);
   public_key: process.env.REACT_APP_PUBLIC_KEY,
   tx_ref: Date.now().toString(), // Note: You can override this in `initiatePayment` if needed
-  amount: 0, // temporary, will be overridden
+  amount: amountInNaira, // temporary, will be overridden
   currency: 'NGN',
   payment_options: 'card,mobilemoney,ussd',
   customer: {
