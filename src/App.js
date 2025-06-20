@@ -277,18 +277,22 @@ const fetchDollarRate = async () => {
 
 
 
-      function quantities() {
-            const rate = await fetchDollarRate();
-            const amountInNaira = (total * rate).toFixed(2);
-}
+  let initPrice;
+
+(async () => {
+  const total = 10;
+  initPrice = await fetch(`https://api.apilayer.com/exchangerates_data/latest?base=USD&symbols=NGN&apikey=${process.env.REACT_APP_EXCHANGE_API_KEY}`)
+    .then(res => res.json())
+    .then(data => (total * data.rates.NGN).toFixed(2))
+    .catch(() => (total * 1700).toFixed(2));
+})();
+
       
       // ✅ Call Hook at top level
-const handleFlutterPayment = useFlutterwave(
-      quantities()
-      {
+const handleFlutterPayment = useFlutterwave({
   public_key: process.env.REACT_APP_PUBLIC_KEY,
   tx_ref: Date.now().toString(), // Note: You can override this in `initiatePayment` if needed
-  amount: amountInNaira, // temporary, will be overridden
+  amount: initPrice, // temporary, will be overridden
   currency: 'NGN',
   payment_options: 'card,mobilemoney,ussd',
   customer: {
@@ -393,7 +397,7 @@ const initiatePayment = async () => {
                 </div>
                 <div className="total">
                     <div className="total-title">Total</div>
-                    <div className="total-price">NGN{total.toFixed(2) * 1700}</div>
+                    <div className="total-price">NGN{initPrice}</div>
                 </div>   <button
   onClick={initiatePayment}
   onMouseOver={(e) => (e.target.style.backgroundColor = '#00796b')}
